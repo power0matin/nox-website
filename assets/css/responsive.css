@@ -1,0 +1,183 @@
+@media(max-width:900px) {
+
+  .cards {
+
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+  .stats-grid {
+
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+  .gallery-grid {
+
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+
+@media(max-width:700px) {
+
+  .nav-links {
+
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: var(--bg-secondary);
+    width: 100%;
+    flex-direction: column;
+    display: none;
+    padding: 20px;
+
+  }
+
+  .hamburger {
+
+    display: flex;
+
+  }
+
+  .hero h1 {
+
+    font-size: 34px;
+
+  }
+
+  .cards {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .footer-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+@media(max-width:600px) {
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .footer-bottom-grid {
+
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:900px) {
+
+  .footer-grid {
+
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+}
+
+@media(max-width:1000px) {
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 850px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 550px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-brand p,
+  .footer-links a,
+  .social-btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* MOBILE NAV */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    padding: 20px 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    display: none;
+    flex-direction: column;
+    gap: 18px;
+    animation: fadeNav 0.3s ease;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+}
+
+
+@keyframes fadeNav {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ریسپانسیو کردن بخش Steps */
+@media (max-width: 900px) {
+  .steps-wrapper {
+    grid-template-columns: 1fr;
+    /* در تبلت و موبایل یک ستونه شود */
+    gap: 40px;
+    /* فاصله بیشتر برای خوانایی */
+  }
+
+  /* مخفی کردن خط اتصال در موبایل (چون دیگه نیازی نیست) */
+  .steps-wrapper::before {
+    display: none;
+  }
+
+  .step-card {
+    min-height: auto;
+  }
+}
