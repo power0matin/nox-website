@@ -2,41 +2,67 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description"
+    content="NOX Roleplay یک سرور حرفه ای VMP رول پلی فارسی با اقتصاد پویا، شغل های متنوع، سیستم پلیس پیشرفته و جامعه فعال است.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="color-scheme" content="dark">
+  <meta name="application-name" content="NOX Roleplay">
 
+  <title>NOX Roleplay | سرور حرفه ای VMP رول پلی فارسی</title>
+  <link rel="canonical" href="https://nox-rp.ir/">
+
+  <link rel="preconnect" href="https://api.tsstatus.net" crossorigin>
   <link rel="preload" href="fonts/vazirmatn/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/logos/logo-main.png" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/logos/logo-navbar.png" as="image">
 
-  <title>NOX Roleplay</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:site_name" content="NOX Roleplay">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NOX Roleplay | سرور حرفه ای VMP رول پلی فارسی">
+  <meta property="og:description"
+    content="NOX Roleplay یک سرور حرفه ای VMP رول پلی فارسی با اقتصاد پویا، شغل های متنوع، سیستم پلیس پیشرفته و جامعه فعال است.">
+  <meta property="og:url" content="https://nox-rp.ir/">
+  <meta property="og:image" content="https://nox-rp.ir/assets/logos/logo-main.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NOX Roleplay | سرور حرفه ای VMP رول پلی فارسی">
+  <meta name="twitter:description"
+    content="NOX Roleplay یک سرور حرفه ای VMP رول پلی فارسی با اقتصاد پویا، شغل های متنوع، سیستم پلیس پیشرفته و جامعه فعال است.">
+  <meta name="twitter:image" content="https://nox-rp.ir/assets/logos/logo-main.png">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "NOX Roleplay | سرور حرفه ای VMP رول پلی فارسی",
+  "description": "NOX Roleplay یک سرور حرفه ای VMP رول پلی فارسی با اقتصاد پویا، شغل های متنوع، سیستم پلیس پیشرفته و جامعه فعال است.",
+  "url": "https://nox-rp.ir/",
+  "inLanguage": "fa-IR",
+  "publisher": {
+    "@type": "Organization",
+    "name": "NOX Roleplay",
+    "url": "https://nox-rp.ir/",
+    "logo": "https://nox-rp.ir/assets/logos/logo-main.png"
+  }
+}
+  </script>
 
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico">
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-  <!-- PWA Icons -->
-  <link rel="manifest" href="/site.webmanifest">
-
-  <meta name="theme-color" content="#0f0f14">
-
-  <meta name="description"
-    content="سرور حرفه‌ای FiveM رول پلی فارسی NOX Roleplay با اقتصاد واقعی، شغل‌های متنوع و جامعه فعال.">
-  <link rel="preload" as="image" href="assets/logos/logo-main.png">
-  <meta property="og:title" content="NOX Roleplay">
-  <meta property="og:description" content="سرور حرفه‌ای رول پلی فارسی FiveM">
-  <meta property="og:image" content="assets/logos/logo-main.png">
-  <meta property="og:type" content="website">
-  <link rel="preload" as="image" href="assets/logos/logo-main.png">
-  <link rel="preload" as="image" href="assets/logos/logo-navbar.png">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
 
   <header class="navbar">
 
@@ -50,7 +76,7 @@
 
       </div>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="منوی اصلی سایت">
         <a href="index.html" class="active">خانه</a>
         <a href="pages/join.html">ورود به سرور</a>
         <a href="pages/rules.html">قوانین</a>
@@ -62,298 +88,298 @@
       </nav>
 
 
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="باز کردن منوی سایت" aria-controls="navLinks"
+        aria-expanded="false"><span></span><span></span><span></span></button>
 
     </div>
 
   </header>
-  <div id="mobileOverlay" class="mobile-overlay"></div>
+  <div id="mobileOverlay" class="mobile-overlay" hidden></div>
 
-  <!-- HERO -->
+  <main id="main-content">
 
-  <section class="hero">
+    <!-- HERO -->
 
-    <div class="hero-bg"></div>
+    <section class="hero">
 
-    <div class="container hero-content">
+      <div class="hero-bg"></div>
 
-      <img class="hero-logo" src="assets/logos/logo-main.png" alt="NOX RP">
+      <div class="container hero-content">
 
-      <h1>سرور حرفه‌ای رول‌پلی NOX</h1>
+        <img class="hero-logo" src="assets/logos/logo-main.png" alt="لوگوی اصلی NOX Roleplay" width="240" height="240"
+          decoding="async" fetchpriority="high">
 
-      <p>
-        یک تجربه کاملاً واقعی از زندگی در Los Santos با اقتصاد پویا،
-        شغل‌های واقعی، سیستم پلیس پیشرفته و جامعه‌ای حرفه‌ای.
-      </p>
+        <h1>سرور حرفه‌ای رول‌پلی NOX</h1>
 
-      <div class="hero-buttons">
+        <p>
+          یک تجربه کاملاً واقعی از زندگی در Los Santos با اقتصاد پویا،
+          شغل‌های واقعی، سیستم پلیس پیشرفته و جامعه‌ای حرفه‌ای.
+        </p>
 
-        <a class="btn primary" href="pages/join.html" aria-label="ورود به سرور NOX Roleplay">
-          شروع بازی
-        </a>
+        <div class="hero-buttons">
 
-        <!-- <a class="btn discord" href="#">ورود به دیسکورد</a> -->
+          <a class="btn primary" href="pages/join.html" aria-label="ورود به سرور NOX Roleplay">
+            شروع بازی
+          </a>
 
-      </div>
+          <!-- <a class="btn discord" href="#">ورود به دیسکورد</a> -->
 
-      <div class="server-status">
+        </div>
 
-        <span class="status-dot online"></span>
-        <span class="status-text">سرور آنلاین</span>
+        <div class="server-status">
 
-        <div class="server-ip">
+          <span class="status-dot online"></span>
+          <span class="status-text">سرور آنلاین</span>
 
-          connect sv.nox-rp.ir
+          <div class="server-ip">
+
+            connect sv.nox-rp.ir
+
+          </div>
 
         </div>
 
       </div>
 
-    </div>
+    </section>
 
-  </section>
+    <!-- FEATURES -->
 
-  <!-- FEATURES -->
+    <section class="features container">
 
-  <section class="features container">
+      <h2 class="section-title">ویژگی‌های سرور</h2>
 
-    <h2 class="section-title">ویژگی‌های سرور</h2>
+      <div class="cards">
 
-    <div class="cards">
+        <div class="card reveal">
 
-      <div class="card reveal">
+          <h3>اقتصاد واقعی</h3>
 
-        <h3>اقتصاد واقعی</h3>
+          <p>
+            سیستم اقتصادی کامل با بانک، سرمایه‌گذاری،
+            خرید و فروش و کسب درآمد واقعی.
+          </p>
 
-        <p>
-          سیستم اقتصادی کامل با بانک، سرمایه‌گذاری،
-          خرید و فروش و کسب درآمد واقعی.
-        </p>
+        </div>
 
-      </div>
+        <div class="card reveal">
 
-      <div class="card reveal">
+          <h3>شغل‌های اختصاصی</h3>
 
-        <h3>شغل‌های اختصاصی</h3>
+          <p>
+            بیش از ۳۰ شغل متنوع از جمله
+            پلیس، پزشک، مکانیک، تاکسی و مشاغل آزاد.
+          </p>
 
-        <p>
-          بیش از ۳۰ شغل متنوع از جمله
-          پلیس، پزشک، مکانیک، تاکسی و مشاغل آزاد.
-        </p>
+        </div>
 
-      </div>
+        <div class="card reveal">
 
-      <div class="card reveal">
+          <h3>سیستم پلیس</h3>
 
-        <h3>سیستم پلیس</h3>
+          <p>
+            دپارتمان پلیس کامل با
+            سیستم دستگیری، زندان و پرونده قضایی.
+          </p>
 
-        <p>
-          دپارتمان پلیس کامل با
-          سیستم دستگیری، زندان و پرونده قضایی.
-        </p>
+        </div>
 
-      </div>
+        <div class="card reveal">
 
-      <div class="card reveal">
+          <h3>خانه و املاک</h3>
 
-        <h3>خانه و املاک</h3>
+          <p>
+            خرید، فروش و مدیریت خانه
+            در نقاط مختلف شهر.
+          </p>
 
-        <p>
-          خرید، فروش و مدیریت خانه
-          در نقاط مختلف شهر.
-        </p>
+        </div>
 
-      </div>
+        <div class="card reveal">
 
-      <div class="card reveal">
+          <h3>ماشین‌های سفارشی</h3>
 
-        <h3>ماشین‌های سفارشی</h3>
+          <p>
+            بیش از ۱۰۰ وسیله نقلیه
+            با سیستم تیونینگ حرفه‌ای.
+          </p>
 
-        <p>
-          بیش از ۱۰۰ وسیله نقلیه
-          با سیستم تیونینگ حرفه‌ای.
-        </p>
+        </div>
 
-      </div>
+        <div class="card reveal">
 
-      <div class="card reveal">
+          <h3>سیستم گنگ</h3>
 
-        <h3>سیستم گنگ</h3>
+          <p>
+            تشکیل گنگ، رقابت برای مناطق
+            و فعالیت‌های غیرقانونی.
+          </p>
 
-        <p>
-          تشکیل گنگ، رقابت برای مناطق
-          و فعالیت‌های غیرقانونی.
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- STATS -->
-
-  <section class="stats">
-
-    <div class="container stats-grid">
-
-      <div class="stat">
-
-        <h3 class="counter" data-target="230">0</h3>
-
-        <p>بازیکن آنلاین</p>
+        </div>
 
       </div>
 
-      <div class="stat">
+    </section>
 
-        <h3 class="counter" data-target="35">0</h3>
+    <!-- STATS -->
 
-        <p>شغل فعال</p>
+    <section class="stats">
+
+      <div class="container stats-grid">
+
+        <div class="stat">
+
+          <h3 class="counter" data-target="230">0</h3>
+
+          <p>بازیکن آنلاین</p>
+
+        </div>
+
+        <div class="stat">
+
+          <h3 class="counter" data-target="35">0</h3>
+
+          <p>شغل فعال</p>
+
+        </div>
+
+        <div class="stat">
+
+          <h3 class="counter" data-target="120">0</h3>
+
+          <p>وسیله نقلیه</p>
+
+        </div>
+
+        <div class="stat">
+
+          <h3 class="counter" data-target="50">0</h3>
+
+          <p>مود مپ</p>
+
+        </div>
 
       </div>
 
-      <div class="stat">
+    </section>
 
-        <h3 class="counter" data-target="120">0</h3>
+    <!-- GALLERY -->
 
-        <p>وسیله نقلیه</p>
+    <section class="gallery-preview container">
+
+      <h2 class="section-title">گالری سرور</h2>
+
+      <div class="gallery-grid">
+
+        <div class="gallery-item">
+          <img src="assets/images/1.jpg" loading="lazy" alt="NOX Roleplay gameplay">
+        </div>
+
+        <div class="gallery-item">
+          <img src="assets/images/2.jpg" loading="lazy" alt="NOX Roleplay gameplay">
+        </div>
+
+        <div class="gallery-item">
+          <img src="assets/images/3.jpg" loading="lazy" alt="NOX Roleplay gameplay">
+        </div>
+
+        <div class="gallery-item">
+          <img src="assets/images/4.jpg" loading="lazy" alt="NOX Roleplay gameplay">
+        </div>
 
       </div>
 
-      <div class="stat">
-
-        <h3 class="counter" data-target="50">0</h3>
-
-        <p>مود مپ</p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- GALLERY -->
-
-  <section class="gallery-preview container">
-
-    <h2 class="section-title">گالری سرور</h2>
-
-    <div class="gallery-grid">
-
-      <div class="gallery-item">
-        <img src="assets/images/1.jpg" loading="lazy" alt="NOX Roleplay gameplay">
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/images/2.jpg" loading="lazy" alt="NOX Roleplay gameplay">
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/images/3.jpg" loading="lazy" alt="NOX Roleplay gameplay">
-      </div>
-
-      <div class="gallery-item">
-        <img src="assets/images/4.jpg" loading="lazy" alt="NOX Roleplay gameplay">
-      </div>
-
-    </div>
-
-    <!-- <div class="gallery-btn">
+      <!-- <div class="gallery-btn">
       <a href="gallery.html" class="btn primary">
         مشاهده گالری کامل
       </a>
     </div> -->
 
-  </section>
+    </section>
 
 
-  <!-- NEWS -->
+    <!-- NEWS -->
 
-  <section class="news container">
+    <section class="news container">
 
-    <h2 class="section-title">آخرین اخبار سرور</h2>
+      <h2 class="section-title">آخرین اخبار سرور</h2>
 
-    <div class="news-grid">
+      <div class="news-grid">
 
-      <div class="news-card reveal">
+        <div class="news-card reveal">
 
-        <h3>آپدیت بزرگ نسخه 3.5</h3>
+          <h3>آپدیت بزرگ نسخه 3.5</h3>
 
-        <p>
-          سیستم جدید اقتصاد و چندین شغل
-          به سرور اضافه شد.
-        </p>
+          <p>
+            سیستم جدید اقتصاد و چندین شغل
+            به سرور اضافه شد.
+          </p>
 
-        <span class="news-date">20 خرداد 1405</span>
+          <span class="news-date">20 خرداد 1405</span>
 
-      </div>
+        </div>
 
-      <div class="news-card reveal">
+        <div class="news-card reveal">
 
-        <h3>افزودن ماشین‌های جدید</h3>
+          <h3>افزودن ماشین‌های جدید</h3>
 
-        <p>
-          ۱۰ خودروی جدید اسپرت
-          به گاراژ سرور اضافه شد.
-        </p>
+          <p>
+            ۱۰ خودروی جدید اسپرت
+            به گاراژ سرور اضافه شد.
+          </p>
 
-        <span class="news-date">15 خرداد 1405</span>
+          <span class="news-date">15 خرداد 1405</span>
 
-      </div>
+        </div>
 
-      <div class="news-card reveal">
+        <div class="news-card reveal">
 
-        <h3>افتتاح دپارتمان EMS</h3>
+          <h3>افتتاح دپارتمان EMS</h3>
 
-        <p>
-          بازیکنان می‌توانند به عنوان
-          پزشک در شهر فعالیت کنند.
-        </p>
+          <p>
+            بازیکنان می‌توانند به عنوان
+            پزشک در شهر فعالیت کنند.
+          </p>
 
-        <span class="news-date">10 خرداد 1405</span>
+          <span class="news-date">10 خرداد 1405</span>
 
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- CTA -->
-
-  <section class="cta">
-
-    <div class="cta-bg"></div>
-
-    <div class="container cta-content">
-
-      <h2>آماده شروع رول پلی هستی؟</h2>
-
-      <p>
-        همین حالا وارد سرور NOX Roleplay شو و داستان خودت را در شهر
-        Los Santos آغاز کن.
-      </p>
-
-      <div class="cta-actions">
-
-        <a href="pages/join.html" class="btn primary big">
-          ورود به سرور
-        </a>
-
-        <div class="cta-ip">
-          connect sv.nox-rp.ir
         </div>
 
       </div>
 
-    </div>
+    </section>
 
-  </section>
+    <!-- CTA -->
 
+    <section class="cta">
+
+      <div class="cta-bg"></div>
+
+      <div class="container cta-content">
+
+        <h2>آماده شروع رول پلی هستی؟</h2>
+
+        <p>
+          همین حالا وارد سرور NOX Roleplay شو و داستان خودت را در شهر
+          Los Santos آغاز کن.
+        </p>
+
+        <div class="cta-actions">
+
+          <a href="pages/join.html" class="btn primary big">
+            ورود به سرور
+          </a>
+
+          <div class="cta-ip">
+            connect sv.nox-rp.ir
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+  </main>
 
   <footer class="footer">
 
@@ -439,7 +465,7 @@
         </span>
 
         <span class="footer-made">
-          Designed for FiveM Roleplay
+          Designed for VMP Roleplay
         </span>
 
       </div>
@@ -448,10 +474,10 @@
 
   </footer>
 
-  <div id="toast-container"></div>
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/security.js"></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/security.js" defer></script>
 
 </body>
 

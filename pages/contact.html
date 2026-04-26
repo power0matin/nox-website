@@ -3,37 +3,60 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>NOX Roleplay</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description"
-    content="راه‌های ارتباط با پشتیبانی و مدیریت سرور NOX Roleplay شامل ارسال پیام، گزارش مشکلات و ارتباط فوری.">
+    content="راه های ارتباط با پشتیبانی و مدیریت سرور NOX Roleplay برای ارسال پیام، گزارش مشکل و دریافت کمک.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="color-scheme" content="dark">
+  <meta name="application-name" content="NOX Roleplay">
 
-  <!-- Favicons -->
+  <title>تماس با NOX Roleplay | پشتیبانی و ارتباط با مدیریت</title>
+  <link rel="canonical" href="https://nox-rp.ir/pages/contact.html">
+
+  <link rel="preconnect" href="https://api.tsstatus.net" crossorigin>
+  <link rel="preload" href="../fonts/vazirmatn/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/logos/logo-main.png" as="image" fetchpriority="high">
+  <link rel="preload" href="../assets/logos/logo-navbar.png" as="image">
+
   <link rel="icon" href="../favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
   <link rel="manifest" href="../site.webmanifest">
-  <meta name="theme-color" content="#0f0f14">
 
-  <!-- Preload -->
-  <link rel="preload" href="../fonts/vazirmatn/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../assets/logos/logo-main.png" as="image">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:site_name" content="NOX Roleplay">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="تماس با NOX Roleplay | پشتیبانی و ارتباط با مدیریت">
+  <meta property="og:description"
+    content="راه های ارتباط با پشتیبانی و مدیریت سرور NOX Roleplay برای ارسال پیام، گزارش مشکل و دریافت کمک.">
+  <meta property="og:url" content="https://nox-rp.ir/pages/contact.html">
+  <meta property="og:image" content="https://nox-rp.ir/assets/logos/logo-main.png">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="ارتباط با ما | NOX Roleplay">
-  <meta property="og:description" content="تماس با پشتیبانی و مدیریت سرور NOX Roleplay.">
-  <meta property="og:image" content="../assets/logos/logo-main.png">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ارتباط با ما | NOX Roleplay">
-  <meta name="twitter:description" content="راه‌های ارتباط با مدیریت سرور.">
-  <meta name="twitter:image" content="../assets/logos/logo-main.png">
+  <meta name="twitter:title" content="تماس با NOX Roleplay | پشتیبانی و ارتباط با مدیریت">
+  <meta name="twitter:description"
+    content="راه های ارتباط با پشتیبانی و مدیریت سرور NOX Roleplay برای ارسال پیام، گزارش مشکل و دریافت کمک.">
+  <meta name="twitter:image" content="https://nox-rp.ir/assets/logos/logo-main.png">
 
-  <!-- Styles -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "تماس با NOX Roleplay | پشتیبانی و ارتباط با مدیریت",
+  "description": "راه های ارتباط با پشتیبانی و مدیریت سرور NOX Roleplay برای ارسال پیام، گزارش مشکل و دریافت کمک.",
+  "url": "https://nox-rp.ir/pages/contact.html",
+  "inLanguage": "fa-IR",
+  "publisher": {
+    "@type": "Organization",
+    "name": "NOX Roleplay",
+    "url": "https://nox-rp.ir/",
+    "logo": "https://nox-rp.ir/assets/logos/logo-main.png"
+  }
+}
+  </script>
+
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
@@ -41,6 +64,7 @@
 
 
 <body>
+  <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
 
   <header class="navbar">
 
@@ -51,7 +75,7 @@
         <span>NOX Roleplay</span>
       </div>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="منوی اصلی سایت">
         <!-- این لینک‌ها در دسکتاپ دیده می‌شوند و در موبایل توسط CSS مخفی می‌شوند -->
         <a href="../index.html">خانه</a>
         <a href="join.html">ورود به سرور</a>
@@ -63,91 +87,90 @@
 
       </nav>
 
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="باز کردن منوی سایت" aria-controls="navLinks"
+        aria-expanded="false"><span></span><span></span><span></span></button>
 
     </div>
 
   </header>
+  <div id="mobileOverlay" class="mobile-overlay" hidden></div>
 
-  <section class="contact-section">
+  <main id="main-content">
+    <section class="contact-section">
 
-    <div class="container">
+      <div class="container">
 
-      <h2 class="section-title">تماس با تیم NOX</h2>
+        <h2 class="section-title">تماس با تیم NOX</h2>
 
-      <p class="contact-desc">
-        اگر سوالی دارید یا نیاز به کمک دارید می‌توانید از طریق TeamSpeak با تیم سرور در ارتباط باشید.
-      </p>
+        <p class="contact-desc">
+          اگر سوالی دارید یا نیاز به کمک دارید می‌توانید از طریق TeamSpeak با تیم سرور در ارتباط باشید.
+        </p>
 
-      <div class="contact-grid">
+        <div class="contact-grid">
 
-        <!-- Teamspeak -->
+          <!-- Teamspeak -->
 
-        <div class="contact-card">
+          <div class="contact-card">
 
-          <div class="contact-icon">🎧</div>
+            <div class="contact-icon">🎧</div>
 
-          <h3>TeamSpeak سرور</h3>
+            <h3>TeamSpeak سرور</h3>
 
-          <p>
-            برای ارتباط مستقیم با تیم مدیریت و پشتیبانی وارد TeamSpeak شوید.
-          </p>
+            <p>
+              برای ارتباط مستقیم با تیم مدیریت و پشتیبانی وارد TeamSpeak شوید.
+            </p>
 
-          <div class="contact-ts">
-            ts.nox-rp.ir
-          </div>
-          <div class="hero-buttons">
+            <div class="contact-ts">
+              ts.nox-rp.ir
+            </div>
+            <div class="hero-buttons">
 
-            <a href="ts3server://ts.nox-rp.ir" class="btn primary contact-btn">
-              اتصال به TeamSpeak
-            </a>
-          </div>
-
-          <div id="ts-status" class="ts-status-card">
-            <div class="ts-status-header"> وضعیت TeamSpeak</div>
-
-            <div class="ts-status-body">
-              <span id="ts-dot" class="ts-dot offline"></span>
-              <span id="ts-text">درحال بررسی...</span>
+              <a href="ts3server://ts.nox-rp.ir" class="btn primary contact-btn">
+                اتصال به TeamSpeak
+              </a>
             </div>
 
-            <div class="ts-users">
-              کاربران: <span id="ts-users-count">0</span>
+            <div id="ts-status" class="ts-status-card">
+              <div class="ts-status-header"> وضعیت TeamSpeak</div>
+
+              <div class="ts-status-body">
+                <span id="ts-dot" class="ts-dot offline"></span>
+                <span id="ts-text">درحال بررسی...</span>
+              </div>
+
+              <div class="ts-users">
+                کاربران: <span id="ts-users-count">0</span>
+              </div>
             </div>
+
+          </div>
+
+
+          <!-- VMP -->
+
+          <div class="contact-card">
+
+            <div class="contact-icon">🎮</div>
+
+            <h3>ورود به سرور VMP</h3>
+
+            <p>
+              برای ورود مستقیم به سرور NOX Roleplay از دستور زیر در F8 استفاده کنید.
+            </p>
+
+            <div class="contact-ip">
+              connect sv.nox-rp.ir
+            </div>
+
           </div>
 
         </div>
 
-
-        <!-- VMP -->
-
-        <div class="contact-card">
-
-          <div class="contact-icon">🎮</div>
-
-          <h3>ورود به سرور VMP</h3>
-
-          <p>
-            برای ورود مستقیم به سرور NOX Roleplay از دستور زیر در F8 استفاده کنید.
-          </p>
-
-          <div class="contact-ip">
-            connect sv.nox-rp.ir
-          </div>
-
-        </div>
 
       </div>
 
-
-    </div>
-
-  </section>
-
+    </section>
+  </main>
 
   <footer class="footer">
 
@@ -237,11 +260,11 @@
 
   </footer>
 
-  <div id="toast-container"></div>
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <script src="../assets/js/ts-status.js"></script>
-  <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/security.js"></script>
+  <script src="../assets/js/ts-status.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/security.js" defer></script>
 
 </body>
 

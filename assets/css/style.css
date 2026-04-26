@@ -2720,3 +2720,318 @@ section {
 .contact-ts.copy-ripple::before {
   animation: ripple .6s ease-out;
 }
+
+/* ==========================================================
+   2026 Coordination Layer — stability, accessibility, UX, SEO UI
+   This layer intentionally overrides conflicts without removing prior styles.
+   ========================================================== */
+
+:root {
+  color-scheme: dark;
+  --navbar-height: 70px;
+  --radius-xl: 24px;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --primary-rgb: 255, 120, 120;
+  --success-rgb: 34, 197, 94;
+  --warning-rgb: 245, 158, 11;
+  --error-rgb: 239, 68, 68;
+  --info-rgb: 59, 130, 246;
+  --bg-main-rgb: 11, 17, 32;
+  --bg-secondary-rgb: 17, 24, 39;
+  --white-rgb: 255, 255, 255;
+  --bg-main-90: rgba(var(--bg-main-rgb), .90);
+  --white-10: rgba(var(--white-rgb), .10);
+  --white-14: rgba(var(--white-rgb), .14);
+  --card-bg-hover: rgba(255, 255, 255, .055);
+  --shadow-medium: 0 18px 45px rgba(0, 0, 0, .36);
+}
+
+html {
+  scroll-padding-top: calc(var(--navbar-height) + 18px);
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+::selection {
+  background: var(--primary-40);
+  color: var(--white);
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10000;
+  transform: translateY(-160%);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform .2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--primary-35);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.container {
+  width: min(92%, var(--container-width));
+  max-width: var(--container-width);
+}
+
+.nav-container {
+  height: var(--navbar-height);
+}
+
+.navbar {
+  background: rgba(var(--bg-main-rgb), .72);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+}
+
+.logo img,
+.footer-logo img {
+  object-fit: contain;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -9px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  transition: width .25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.hamburger {
+  padding: 0;
+  color: inherit;
+}
+
+.mobile-overlay[hidden] {
+  display: none;
+}
+
+.hero-content,
+.cta-content,
+.contact-section .container {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-logo {
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.btn,
+.server-ip,
+.footer-ip,
+.cta-ip,
+.contact-ip,
+.contact-ts,
+.step-ip,
+.rule-nav-btn,
+.social-btn {
+  touch-action: manipulation;
+}
+
+.card,
+.news-card,
+.step-card,
+.team-card,
+.contact-card,
+.ts-status-card,
+.faq-item,
+.status-box {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .035) inset;
+}
+
+.status-box {
+  width: fit-content;
+  margin: 22px auto 0;
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 1px solid var(--white-05);
+  background: linear-gradient(145deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02));
+}
+
+.gallery-preview {
+  position: relative;
+}
+
+.team-body {
+  position: relative;
+  z-index: 1;
+}
+
+.faq-question,
+.rule-nav-btn,
+.toast-close,
+.hamburger {
+  user-select: none;
+}
+
+.faq-item[hidden],
+.card[hidden],
+.rule-card[hidden] {
+  display: none !important;
+}
+
+.toast-close {
+  border: 0;
+  background: transparent;
+  font: inherit;
+}
+
+.rule-badge.warning,
+.role-admin {
+  color: #1f2937;
+}
+
+.role-mod {
+  color: #052e16;
+}
+
+.ts-dot.loading {
+  background: var(--warning);
+  box-shadow: 0 0 8px rgba(var(--warning-rgb), .5);
+  animation: pulseYellow 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseYellow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--warning-rgb), .42);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--warning-rgb), 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--warning-rgb), 0);
+  }
+}
+
+/* ==========================================================
+   JOIN PAGE FIX — Hero server status alignment
+   Fixes separated IP/status pills inside join hero
+   ========================================================== */
+
+.hero .server-status {
+  width: fit-content;
+  max-width: 100%;
+  margin: 34px auto 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+.hero .status-box {
+  width: fit-content;
+  margin: 0;
+  padding: 12px 16px;
+
+  border-radius: 16px;
+  border: 1px solid var(--white-05);
+
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .02));
+
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .035) inset,
+    0 10px 28px rgba(0, 0, 0, .22);
+}
+
+.hero .footer-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.hero .server-ip {
+  margin: 0;
+  min-height: 48px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+  direction: ltr;
+  text-align: center;
+
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .02));
+
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .035) inset,
+    0 10px 28px rgba(0, 0, 0, .22);
+}
+
+/* Better hero spacing for Join page */
+.hero .hero-buttons {
+  margin: 40px 0 0;
+}
+
+/* Mobile-friendly join hero pills */
+@media (max-width: 600px) {
+  .hero .server-status {
+    width: 100%;
+    margin-top: 28px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero .status-box,
+  .hero .server-ip {
+    width: min(100%, 320px);
+  }
+}

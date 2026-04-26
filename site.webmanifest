@@ -1,17 +1,14 @@
 {
   "name": "NOX Roleplay",
   "short_name": "NOX RP",
-  "description": "NOX Roleplay — Iranian GTA Roleplay Server with high quality gameplay, jobs, rules and UI. Join and experience advanced roleplay.",
-  "lang": "fa",
+  "description": "سرور حرفه ای VMP رول پلی فارسی NOX Roleplay",
+  "lang": "fa-IR",
   "dir": "rtl",
-  "start_url": "/index.html",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "theme_color": "#0f0f14",
-  "background_color": "#0f0f14",
-  "orientation": "portrait",
-  "prefer_related_applications": false,
-
+  "background_color": "#0b1120",
+  "theme_color": "#0b1120",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -24,30 +21,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/apple-touch-icon.png",
-      "sizes": "180x180",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/favicon-32x32.png",
-      "sizes": "32x32",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon",
-      "purpose": "any"
     }
   ]
 }

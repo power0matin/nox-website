@@ -1,118 +1,78 @@
-/*
-   Secure Runtime Guard (Production Safe Version)
-   Focus: Integrity signals + anomaly reporting (non-intrusive)
-   Author: @power0matin -> https://github.com/power0matin
-*/
+/* ==========================================================
+   Secure Runtime Guard — non-intrusive production signals
+   ========================================================== */
 
-(function () {
+(() => {
   "use strict";
 
   const CONFIG = {
     anomalyThreshold: 2,
-    checkInterval: 2500,
-    devtoolsDelayThreshold: 80,
+    checkInterval: 3000,
+    longTaskThreshold: 120,
   };
 
   let anomalyScore = 0;
-  let lastCheck = 0;
-  let sourceHash = null;
+  let lastCheck = performance.now();
 
-  async function sha256(str) {
-    const buf = new TextEncoder().encode(str);
-    const digest = await crypto.subtle.digest("SHA-256", buf);
-
-    return Array.from(new Uint8Array(digest))
-      .map((b) => b.toString(16).padStart(2, "0"))
-      .join("");
+  function reportAnomaly(type, extra = {}) {
+    window.dispatchEvent(
+      new CustomEvent("security-anomaly", {
+        detail: {
+          type,
+          score: Number(anomalyScore.toFixed(2)),
+          time: Date.now(),
+          ...extra,
+        },
+      }),
+    );
   }
 
-  const SOURCE = document.currentScript?.textContent || "";
-
-  sha256(SOURCE).then((h) => {
-    sourceHash = h;
-  });
-
-  function reportAnomaly(type) {
-    try {
-      window.dispatchEvent(
-        new CustomEvent("security-anomaly", {
-          detail: {
-            type,
-            score: anomalyScore,
-            time: Date.now(),
-          },
-        }),
-      );
-    } catch (e) {}
-  }
-
-  async function integrityCheck() {
-    if (!sourceHash) return;
-
-    const current = document.currentScript?.textContent || "";
-    const currentHash = await sha256(current);
-
-    if (currentHash !== sourceHash) {
-      anomalyScore += 1;
-    } else if (anomalyScore > 0) {
-      anomalyScore -= 0.5;
-    }
-
+  function addScore(amount, reason) {
+    anomalyScore = Math.min(10, anomalyScore + amount);
     if (anomalyScore >= CONFIG.anomalyThreshold) {
-      reportAnomaly("script_tamper_detected");
+      reportAnomaly(reason || "runtime_anomaly");
     }
   }
-  function devtoolsSignal() {
+
+  function decayScore() {
+    anomalyScore = Math.max(0, anomalyScore - 0.15);
+  }
+
+  function monitorMainThreadDelay() {
     const start = performance.now();
 
-    queueMicrotask(() => {
+    window.setTimeout(() => {
       const delta = performance.now() - start;
-
-      if (delta > CONFIG.devtoolsDelayThreshold) {
-        anomalyScore += 0.3;
+      if (delta > CONFIG.longTaskThreshold) {
+        addScore(0.25, "main_thread_blocked", { delta: Math.round(delta) });
+      } else {
+        decayScore();
       }
-    });
-  }
-  function handleKeydown(e) {
-    const key = (e.key || "").toLowerCase();
-    const isCtrl = e.ctrlKey || e.metaKey;
-
-    const blocked =
-      key === "f12" ||
-      (isCtrl && key === "u") ||
-      (isCtrl && e.shiftKey && ["i", "j", "c"].includes(key));
-
-    if (blocked) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      anomalyScore += 1;
-      reportAnomaly("devtools_shortcut_used");
-
-      return false;
-    }
+    }, 0);
   }
 
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      anomalyScore += 0.2;
-    }
-  });
+  function monitorVisibility() {
+    if (document.hidden) addScore(0.1, "page_hidden");
+  }
 
-  function monitor() {
+  function monitorShortcutSignals(event) {
+    const key = String(event.key || "").toLowerCase();
+    const isCtrl = event.ctrlKey || event.metaKey;
+    const devtoolsLike = key === "f12" || (isCtrl && event.shiftKey && ["i", "j", "c"].includes(key));
+
+    // No blocking: blocking DevTools hurts UX and does not provide real security.
+    if (devtoolsLike) addScore(0.35, "developer_shortcut_signal");
+  }
+
+  function tick() {
     const now = performance.now();
     if (now - lastCheck < CONFIG.checkInterval) return;
 
     lastCheck = now;
-
-    integrityCheck();
-    devtoolsSignal();
-
-    if (anomalyScore >= CONFIG.anomalyThreshold) {
-      reportAnomaly("high_risk_environment");
-    }
+    monitorMainThreadDelay();
   }
-  window.addEventListener("keydown", handleKeydown, true);
 
-  setInterval(monitor, CONFIG.checkInterval);
+  document.addEventListener("visibilitychange", monitorVisibility);
+  window.addEventListener("keydown", monitorShortcutSignals, true);
+  window.setInterval(tick, CONFIG.checkInterval);
 })();

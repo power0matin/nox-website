@@ -1,388 +1,384 @@
-/* ===============================
-   Mobile Navigation Toggle
-================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  const hamburger = document.getElementById("hamburger");
-  const navLinks = document.getElementById("navLinks");
-  const mobileOverlay = document.getElementById("mobileOverlay");
+/* ==========================================================
+   NOX Roleplay Main Scripts — stable, accessible, defensive
+   ========================================================== */
 
-  function openMenu() {
-    hamburger.classList.add("active");
-    navLinks.classList.add("open");
-    mobileOverlay.classList.add("show");
-  }
+(() => {
+  "use strict";
 
-  function closeMenu() {
-    hamburger.classList.remove("active");
-    navLinks.classList.remove("open");
-    mobileOverlay.classList.remove("show");
-  }
+  const SERVER_CONNECT = "connect sv.nox-rp.ir";
+  const TOAST_DURATION = 3200;
 
-  hamburger.addEventListener("click", () => {
-    navLinks.classList.contains("open") ? closeMenu() : openMenu();
-  });
+  const qs = (selector, scope = document) => scope.querySelector(selector);
+  const qsa = (selector, scope = document) => [
+    ...scope.querySelectorAll(selector),
+  ];
 
-  mobileOverlay.addEventListener("click", closeMenu);
-
-  document.querySelectorAll(".nav-links a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-});
-
-/* ===============================
-   Smooth Scroll for Anchor Links
-================================ */
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    const targetId = this.getAttribute("href");
-
-    if (targetId === "#") return;
-
-    const targetElement = document.querySelector(targetId);
-
-    if (targetElement) {
-      e.preventDefault();
-
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  });
-});
-
-/* ===============================
-   Reveal Elements on Scroll
-================================ */
-const revealElements = document.querySelectorAll(".reveal");
-
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
-    });
-  },
-  {
-    threshold: 0.15,
-  },
-);
-
-revealElements.forEach((el) => revealObserver.observe(el));
-
-/* ===============================
-   Animated Counters
-================================ */
-const counters = document.querySelectorAll(".counter");
-
-function runCounter(counter) {
-  const target = +counter.dataset.target;
-  let count = 0;
-  const speed = target / 100;
-
-  const update = () => {
-    if (count < target) {
-      count += speed;
-      counter.innerText = Math.ceil(count);
-      requestAnimationFrame(update);
+  function onReady(callback) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", callback, { once: true });
     } else {
-      counter.innerText = target;
+      callback();
     }
-  };
-
-  update();
-}
-
-const counterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        runCounter(entry.target);
-        counterObserver.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.6,
-  },
-);
-
-counters.forEach((counter) => counterObserver.observe(counter));
-
-/* ===============================
-   Copy Server IP to Clipboard
-================================ */
-
-const ipElements = document.querySelectorAll(".server-ip, .footer-ip, .cta-ip");
-
-function copyText(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    return navigator.clipboard.writeText(text);
   }
 
-  // fallback for http / local
-  return new Promise((resolve) => {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
+  function setText(el, value) {
+    if (el) el.textContent = value;
+  }
 
+  async function copyText(text) {
+    const value = String(text || "").trim();
+    if (!value) return false;
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
+        return true;
+      }
+    } catch (_) {
+      // Fallback below.
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "");
     textarea.style.position = "fixed";
+    textarea.style.inset = "0 auto auto 0";
+    textarea.style.width = "1px";
+    textarea.style.height = "1px";
     textarea.style.opacity = "0";
 
     document.body.appendChild(textarea);
-
-    textarea.focus();
+    textarea.focus({ preventScroll: true });
     textarea.select();
 
-    document.execCommand("copy");
-
-    textarea.remove();
-
-    resolve();
-  });
-}
-
-ipElements.forEach((el) => {
-  el.addEventListener("click", (e) => {
-    const ip = "connect sv.nox-rp.ir";
-
-    const rect = el.getBoundingClientRect();
-
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    el.style.setProperty("--ripple-x", x + "px");
-    el.style.setProperty("--ripple-y", y + "px");
-
-    copyText(ip).then(() => {
-      el.classList.add("copy-success");
-      el.classList.add("copy-animate");
-      el.classList.add("copy-ripple");
-
-      showToast("IP سرور کپی شد");
-
-      setTimeout(() => {
-        el.classList.remove("copy-success");
-        el.classList.remove("copy-animate");
-        el.classList.remove("copy-ripple");
-      }, 1500);
-    });
-  });
-});
-
-/* ===============================
-   Toast Notification
-================================ */
-
-function showToast(message, type = "success") {
-  const container = document.getElementById("toast-container");
-  if (!container) return;
-
-  const toast = document.createElement("div");
-  toast.className = "toast " + type;
-
-  toast.innerHTML = `
-    <div class="toast-icon">✅</div>
-    <div class="toast-text">${message}</div>
-    <div class="toast-close">✕</div>
-  `;
-
-  container.appendChild(toast);
-
-  const duration = 3000;
-  let remaining = duration;
-  let timer;
-  let startTime;
-
-  function startTimer() {
-    startTime = Date.now();
-
-    timer = setTimeout(() => {
-      hideToast();
-    }, remaining);
-  }
-
-  function pauseTimer() {
-    clearTimeout(timer);
-    remaining -= Date.now() - startTime;
-  }
-
-  function resumeTimer() {
-    startTimer();
-  }
-
-  function hideToast() {
-    toast.classList.add("hide");
-
-    setTimeout(() => {
-      toast.remove();
-    }, 350);
-  }
-
-  startTimer();
-
-  toast.addEventListener("mouseenter", pauseTimer);
-  toast.addEventListener("mouseleave", resumeTimer);
-
-  toast.querySelector(".toast-close").onclick = hideToast;
-}
-
-const rules = document.querySelectorAll(".rule-card");
-
-rules.forEach((rule) => {
-  const header = rule.querySelector(".rule-header");
-  const body = rule.querySelector(".rule-body");
-
-  header.addEventListener("click", () => {
-    body.style.display = body.style.display === "block" ? "none" : "block";
-  });
-});
-
-const search = document.getElementById("rulesSearch");
-
-if (search) {
-  search.addEventListener("input", function () {
-    const value = this.value.toLowerCase();
-
-    rules.forEach((rule) => {
-      const text = rule.innerText.toLowerCase();
-
-      rule.style.display = text.includes(value) ? "block" : "none";
-    });
-  });
-}
-
-/* ===============================
-   FAQ Accordion
-================================ */
-
-document.querySelectorAll(".faq-question").forEach((q) => {
-  q.addEventListener("click", () => {
-    const item = q.parentElement;
-
-    item.classList.toggle("active");
-  });
-});
-
-/* ===============================
-   FAQ Live Search
-================================ */
-
-const searchInput = document.getElementById("faqSearch");
-
-if (searchInput) {
-  searchInput.addEventListener("input", () => {
-    const value = searchInput.value.toLowerCase();
-
-    document.querySelectorAll(".faq-item").forEach((item) => {
-      const text = item.innerText.toLowerCase();
-
-      item.style.display = text.includes(value) ? "block" : "none";
-    });
-  });
-}
-
-console.log("script loaded");
-
-/* ===============================
-   Copy Contact TS/IP
-================================ */
-
-const copyTargets = document.querySelectorAll(".contact-ip, .contact-ts");
-
-copyTargets.forEach((el) => {
-  el.addEventListener("click", (e) => {
-    e.stopPropagation();
-
-    const value = el.innerText.trim();
-
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    el.style.setProperty("--ripple-x", x + "px");
-    el.style.setProperty("--ripple-y", y + "px");
-
-    copyText(value).then(() => {
-      el.classList.add("copy-success");
-      el.classList.add("copy-animate");
-      el.classList.add("copy-ripple");
-
-      showToast("کپی شد: " + value);
-
-      setTimeout(() => {
-        el.classList.remove("copy-success", "copy-animate", "copy-ripple");
-      }, 1500);
-    });
-  });
-});
-
-/* ===============================
-   TeamSpeak Live Status (FINAL)
-================================ */
-
-const TS_API_URL = "https://api.tsstatus.net/ts3.php?address=ts.nox-rp.ir";
-
-const TS_REFRESH_INTERVAL = 15000;
-const TS_TIMEOUT = 7000;
-
-function setOfflineState() {
-  const dot = document.getElementById("ts-dot");
-  const text = document.getElementById("ts-text");
-  const users = document.getElementById("ts-users-count");
-
-  if (!dot || !text || !users) return;
-
-  dot.className = "ts-dot offline";
-  text.innerText = "آفلاین";
-  users.innerText = "0";
-}
-
-function setOnlineState(data) {
-  const dot = document.getElementById("ts-dot");
-  const text = document.getElementById("ts-text");
-  const users = document.getElementById("ts-users-count");
-
-  if (!dot || !text || !users) return;
-
-  dot.className = "ts-dot online";
-  text.innerText = "آنلاین";
-  users.innerText = data.virtualserver_clientsonline ?? "0";
-}
-
-async function fetchTSStatus() {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), TS_TIMEOUT);
-
-  try {
-    const res = await fetch(TS_API_URL, {
-      method: "GET",
-      signal: controller.signal,
-      headers: {
-        Accept: "application/json",
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error("TS API response not OK");
+    let copied = false;
+    try {
+      copied = document.execCommand("copy");
+    } catch (_) {
+      copied = false;
     }
 
-    const data = await res.json();
+    textarea.remove();
+    return copied;
+  }
 
-    if (!data || data.status !== "online") {
-      setOfflineState();
+  function showToast(message, type = "success") {
+    const container = qs("#toast-container");
+    if (!container) return;
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.setAttribute("role", "status");
+
+    const icon = type === "success" ? "✅" : type === "error" ? "⚠️" : "ℹ️";
+    toast.innerHTML = `
+      <div class="toast-icon" aria-hidden="true">${icon}</div>
+      <div class="toast-text"></div>
+      <button class="toast-close" type="button" aria-label="بستن پیام">×</button>
+    `;
+
+    setText(qs(".toast-text", toast), message);
+    container.appendChild(toast);
+
+    let timer = window.setTimeout(hideToast, TOAST_DURATION);
+
+    function hideToast() {
+      window.clearTimeout(timer);
+      toast.classList.add("hide");
+      window.setTimeout(() => toast.remove(), 360);
+    }
+
+    toast.addEventListener("mouseenter", () => window.clearTimeout(timer));
+    toast.addEventListener("mouseleave", () => {
+      timer = window.setTimeout(hideToast, 1200);
+    });
+
+    qs(".toast-close", toast)?.addEventListener("click", hideToast);
+  }
+
+  function applyCopyFeedback(el, event) {
+    const rect = el.getBoundingClientRect();
+    const point =
+      event && "clientX" in event
+        ? { x: event.clientX - rect.left, y: event.clientY - rect.top }
+        : { x: rect.width / 2, y: rect.height / 2 };
+
+    el.style.setProperty("--ripple-x", `${point.x}px`);
+    el.style.setProperty("--ripple-y", `${point.y}px`);
+
+    el.classList.remove("copy-success", "copy-animate", "copy-ripple");
+    void el.offsetWidth;
+    el.classList.add("copy-success", "copy-animate", "copy-ripple");
+
+    window.setTimeout(() => {
+      el.classList.remove("copy-success", "copy-animate", "copy-ripple");
+    }, 1500);
+  }
+
+  function initMobileNavigation() {
+    const hamburger = qs("#hamburger");
+    const navLinks = qs("#navLinks");
+    const overlay = qs("#mobileOverlay");
+
+    if (!hamburger || !navLinks || !overlay) return;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    function openMenu() {
+      hamburger.classList.add("active");
+      hamburger.setAttribute("aria-expanded", "true");
+
+      navLinks.classList.add("open");
+
+      overlay.hidden = false;
+      overlay.classList.add("show");
+
+      document.body.classList.add("menu-open");
+
+      qs(focusableSelector, navLinks)?.focus({ preventScroll: true });
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove("active");
+      hamburger.setAttribute("aria-expanded", "false");
+
+      navLinks.classList.remove("open");
+
+      overlay.classList.remove("show");
+      document.body.classList.remove("menu-open");
+
+      window.setTimeout(() => {
+        if (!navLinks.classList.contains("open")) {
+          overlay.hidden = true;
+        }
+      }, 250);
+    }
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.contains("open") ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener("click", closeMenu);
+
+    qsa("a", navLinks).forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && navLinks.classList.contains("open")) {
+        closeMenu();
+        hamburger.focus({ preventScroll: true });
+      }
+    });
+  }
+
+  function initSmoothAnchors() {
+    qsa('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (event) => {
+        const targetId = anchor.getAttribute("href");
+        if (!targetId || targetId === "#") return;
+
+        const target = qs(targetId);
+        if (!target) return;
+
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
+    });
+  }
+
+  function initReveal() {
+    const elements = qsa(".reveal");
+    if (!elements.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((el) => el.classList.add("active"));
       return;
     }
 
-    setOnlineState(data);
-  } catch (err) {
-    console.error("TeamSpeak Status Error:", err);
-    setOfflineState();
-  } finally {
-    clearTimeout(timeout);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.14,
+        rootMargin: "0px 0px -40px 0px",
+      },
+    );
+
+    elements.forEach((el) => observer.observe(el));
   }
-}
 
-fetchTSStatus();
+  function initCounters() {
+    const counters = qsa(".counter");
+    if (!counters.length) return;
 
-setInterval(fetchTSStatus, TS_REFRESH_INTERVAL);
+    function runCounter(counter) {
+      const target = Number(counter.dataset.target || 0);
+
+      if (!Number.isFinite(target) || target <= 0) {
+        counter.textContent = "0";
+        return;
+      }
+
+      const duration = 1200;
+      const start = performance.now();
+
+      function frame(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        counter.textContent = String(Math.round(target * eased));
+
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      counters.forEach(runCounter);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.55 },
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
+  }
+
+  function initCopyBlocks() {
+    const selectors =
+      ".server-ip, .footer-ip, .cta-ip, .contact-ip, .contact-ts, .step-ip";
+
+    qsa(selectors).forEach((el) => {
+      if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "0");
+      if (!el.hasAttribute("role")) el.setAttribute("role", "button");
+      if (!el.hasAttribute("aria-label"))
+        el.setAttribute("aria-label", "کپی مقدار");
+
+      async function handleCopy(event) {
+        event.preventDefault();
+
+        const isServerCopy =
+          el.classList.contains("server-ip") ||
+          el.classList.contains("footer-ip") ||
+          el.classList.contains("cta-ip") ||
+          el.classList.contains("step-ip");
+
+        const value =
+          el.dataset.copy ||
+          (isServerCopy ? SERVER_CONNECT : el.textContent.trim());
+
+        const ok = await copyText(value);
+
+        if (ok) {
+          applyCopyFeedback(el, event);
+          showToast(`کپی شد: ${value}`);
+        } else {
+          showToast(
+            "کپی خودکار انجام نشد. لطفا متن را دستی کپی کنید.",
+            "error",
+          );
+        }
+      }
+
+      el.addEventListener("click", handleCopy);
+
+      el.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          handleCopy(event);
+        }
+      });
+    });
+  }
+
+  function initFaq() {
+    qsa(".faq-question").forEach((question) => {
+      const item = question.closest(".faq-item");
+      if (!item) return;
+
+      question.setAttribute("role", "button");
+      question.setAttribute("tabindex", "0");
+      question.setAttribute(
+        "aria-expanded",
+        item.classList.contains("active") ? "true" : "false",
+      );
+
+      function toggle() {
+        const isOpen = item.classList.toggle("active");
+        question.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      }
+
+      question.addEventListener("click", toggle);
+
+      question.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggle();
+        }
+      });
+    });
+
+    const search = qs("#faqSearch");
+    if (!search) return;
+
+    search.addEventListener("input", () => {
+      const value = search.value.trim().toLocaleLowerCase("fa-IR");
+
+      qsa(".faq-item").forEach((item) => {
+        const text = item.textContent.toLocaleLowerCase("fa-IR");
+        item.hidden = value.length > 0 && !text.includes(value);
+      });
+    });
+  }
+
+  function initRulesSearch() {
+    const search = qs("#rulesSearch");
+    if (!search) return;
+
+    const ruleCards = qsa(".card, .rule-card").filter((card) => {
+      return card.closest(".rules") || card.closest("main");
+    });
+
+    search.addEventListener("input", () => {
+      const value = search.value.trim().toLocaleLowerCase("fa-IR");
+
+      ruleCards.forEach((card) => {
+        const text = card.textContent.toLocaleLowerCase("fa-IR");
+        card.hidden = value.length > 0 && !text.includes(value);
+      });
+    });
+  }
+
+  onReady(() => {
+    initMobileNavigation();
+    initSmoothAnchors();
+    initReveal();
+    initCounters();
+    initCopyBlocks();
+    initFaq();
+    initRulesSearch();
+  });
+})();

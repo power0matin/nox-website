@@ -3,36 +3,57 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="معرفی اعضای تیم مدیریت، سرپرستان، ناظران و مسئولین سرور NOX Roleplay.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="color-scheme" content="dark">
+  <meta name="application-name" content="NOX Roleplay">
 
-  <title>NOX Roleplay</title>
-  <meta name="description" content="معرفی کامل اعضای تیم مدیریت، سرپرستان، ناظران و تمامی مسئولین سرور NOX Roleplay.">
+  <title>تیم مدیریت NOX Roleplay | اعضا و مسئولین سرور</title>
+  <link rel="canonical" href="https://nox-rp.ir/pages/team.html">
 
-  <!-- Favicons -->
+  <link rel="preconnect" href="https://api.tsstatus.net" crossorigin>
+  <link rel="preload" href="../fonts/vazirmatn/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/logos/logo-main.png" as="image" fetchpriority="high">
+  <link rel="preload" href="../assets/logos/logo-navbar.png" as="image">
+
   <link rel="icon" href="../favicon.ico">
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
   <link rel="manifest" href="../site.webmanifest">
-  <meta name="theme-color" content="#0f0f14">
 
-  <!-- Preload -->
-  <link rel="preload" href="../fonts/vazirmatn/Vazirmatn-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../assets/logos/logo-main.png" as="image">
+  <meta property="og:locale" content="fa_IR">
+  <meta property="og:site_name" content="NOX Roleplay">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="تیم مدیریت NOX Roleplay | اعضا و مسئولین سرور">
+  <meta property="og:description" content="معرفی اعضای تیم مدیریت، سرپرستان، ناظران و مسئولین سرور NOX Roleplay.">
+  <meta property="og:url" content="https://nox-rp.ir/pages/team.html">
+  <meta property="og:image" content="https://nox-rp.ir/assets/logos/logo-main.png">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="تیم مدیریت | NOX Roleplay">
-  <meta property="og:description" content="آشنایی با تیم مدیریت، سرپرستان و ناظران سرور.">
-  <meta property="og:image" content="../assets/logos/logo-navbar.png">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="تیم مدیریت | NOX Roleplay">
-  <meta name="twitter:description" content="معرفی کامل تیم مدیریتی سرور.">
-  <meta name="twitter:image" content="../assets/logos/logo-navbar.png">
+  <meta name="twitter:title" content="تیم مدیریت NOX Roleplay | اعضا و مسئولین سرور">
+  <meta name="twitter:description" content="معرفی اعضای تیم مدیریت، سرپرستان، ناظران و مسئولین سرور NOX Roleplay.">
+  <meta name="twitter:image" content="https://nox-rp.ir/assets/logos/logo-main.png">
 
-  <!-- Styles -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "تیم مدیریت NOX Roleplay | اعضا و مسئولین سرور",
+  "description": "معرفی اعضای تیم مدیریت، سرپرستان، ناظران و مسئولین سرور NOX Roleplay.",
+  "url": "https://nox-rp.ir/pages/team.html",
+  "inLanguage": "fa-IR",
+  "publisher": {
+    "@type": "Organization",
+    "name": "NOX Roleplay",
+    "url": "https://nox-rp.ir/",
+    "logo": "https://nox-rp.ir/assets/logos/logo-main.png"
+  }
+}
+  </script>
+
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
@@ -40,6 +61,7 @@
 
 
 <body>
+  <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
 
   <header class="navbar">
 
@@ -47,12 +69,12 @@
 
       <div class="logo">
 
-        <img src="../../assets/logos/logo-navbar.png" alt="NOX Roleplay">
+        <img src="../assets/logos/logo-navbar.png" alt="NOX Roleplay">
         <span>NOX Roleplay</span>
 
       </div>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="منوی اصلی سایت">
         <a href="../index.html">خانه</a>
         <a href="join.html">ورود به سرور</a>
         <a href="rules.html">قوانین</a>
@@ -63,250 +85,248 @@
 
       </nav>
 
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="باز کردن منوی سایت" aria-controls="navLinks"
+        aria-expanded="false"><span></span><span></span><span></span></button>
 
     </div>
 
   </header>
+  <div id="mobileOverlay" class="mobile-overlay" hidden></div>
 
+  <main id="main-content"><!-- HERO -->
 
-  <!-- HERO -->
+    <section class="hero">
 
-  <section class="hero">
+      <div class="hero-bg"></div>
 
-    <div class="hero-bg"></div>
+      <div class="container hero-content">
 
-    <div class="container hero-content">
+        <img class="hero-logo" src="../assets/logos/logo-main.png" alt="لوگوی اصلی NOX Roleplay" width="240"
+          height="240" decoding="async" fetchpriority="high">
 
-      <img class="hero-logo" src="../../assets/logos/logo-main.png">
+        <h1>تیم مدیریت سرور</h1>
 
-      <h1>تیم مدیریت سرور</h1>
-
-      <p>
-        تیم NOX Roleplay متشکل از افراد با تجربه در مدیریت سرورهای رول‌پلی است
-        که هدف آن‌ها ایجاد یک تجربه حرفه‌ای و منصفانه برای بازیکنان است.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- MANAGEMENT -->
-
-  <section class="container">
-
-    <h2 class="section-title">مدیریت سرور</h2>
-
-    <div class="team-grid">
-
-      <div class="team-card reveal">
-
-        <span class="role-badge role-owner">Owner</span>
-
-        <div class="team-avatar">
-          <img src="../../assets/images/team/test.png" alt="team member">
-        </div>
-
-
-        <div class="team-body">
-
-          <div class="team-name">Matin Shahabadi</div>
-
-          <div class="team-role">Founder & Server Owner</div>
-
-        </div>
-
+        <p>
+          تیم NOX Roleplay متشکل از افراد با تجربه در مدیریت سرورهای رول‌پلی است
+          که هدف آن‌ها ایجاد یک تجربه حرفه‌ای و منصفانه برای بازیکنان است.
+        </p>
 
       </div>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- ADMIN TEAM -->
+    <!-- MANAGEMENT -->
 
-  <section class="container">
+    <section class="container">
 
-    <h2 class="section-title">ادمین‌ها</h2>
+      <h2 class="section-title">مدیریت سرور</h2>
 
-    <div class="team-grid">
+      <div class="team-grid">
 
-      <div class="team-card reveal">
+        <div class="team-card reveal">
 
-        <span class="role-badge role-admin">Admin</span>
+          <span class="role-badge role-owner">Owner</span>
 
-        <div class="team-avatar">
-          <img src="../../assets/images/team/test.png" alt="team member">
-        </div>
+          <div class="team-avatar">
+            <img src="../assets/images/team/test.png" loading="lazy" decoding="async" alt="team member">
+          </div>
 
 
-        <div class="team-body">
+          <div class="team-body">
 
-          <div class="team-name">Reza</div>
-          <div class="team-role">Server Administrator</div>
+            <div class="team-name">Matin Shahabadi</div>
+
+            <div class="team-role">Founder & Server Owner</div>
+
+          </div>
+
 
         </div>
 
       </div>
 
-
-      <div class="team-card reveal">
-
-        <span class="role-badge role-admin">Admin</span>
-
-        <div class="team-avatar">
-          <img src="../../assets/images/team/test.png" alt="team member">
-        </div>
+    </section>
 
 
-        <div class="team-body">
+    <!-- ADMIN TEAM -->
 
-          <div class="team-name">Ali</div>
-          <div class="team-role">Server Administrator</div>
+    <section class="container">
 
-        </div>
+      <h2 class="section-title">ادمین‌ها</h2>
 
-      </div>
+      <div class="team-grid">
 
-    </div>
+        <div class="team-card reveal">
 
-  </section>
+          <span class="role-badge role-admin">Admin</span>
 
-  <section class="container">
-
-    <h2 class="section-title">Moderator ها</h2>
-
-    <div class="team-grid">
-
-      <div class="team-card reveal">
-
-        <span class="role-badge role-mod">Moderator</span>
-
-        <div class="team-avatar">
-          <img src="../../assets/images/team/test.png" alt="team member">
-        </div>
+          <div class="team-avatar">
+            <img src="../assets/images/team/test.png" loading="lazy" decoding="async" alt="team member">
+          </div>
 
 
-        <div class="team-body">
+          <div class="team-body">
 
-          <div class="team-name">Sina</div>
-          <div class="team-role">Community Moderator</div>
+            <div class="team-name">Reza</div>
+            <div class="team-role">Server Administrator</div>
+
+          </div>
 
         </div>
 
-      </div>
+
+        <div class="team-card reveal">
+
+          <span class="role-badge role-admin">Admin</span>
+
+          <div class="team-avatar">
+            <img src="../assets/images/team/test.png" loading="lazy" decoding="async" alt="team member">
+          </div>
 
 
-      <div class="team-card reveal">
+          <div class="team-body">
 
-        <span class="role-badge role-mod">Moderator</span>
+            <div class="team-name">Ali</div>
+            <div class="team-role">Server Administrator</div>
 
-        <div class="team-avatar">
-          <img src="../../assets/images/team/test.png" alt="team member">
-        </div>
-
-
-        <div class="team-body">
-
-          <div class="team-name">Arman</div>
-          <div class="team-role">Community Moderator</div>
+          </div>
 
         </div>
 
       </div>
 
+    </section>
 
-      <div class="team-card reveal">
+    <section class="container">
 
-        <span class="role-badge role-mod">Moderator</span>
+      <h2 class="section-title">Moderator ها</h2>
 
-        <div class="team-avatar">
-          <img src="../../assets/images/team/test.png" alt="team member">
+      <div class="team-grid">
+
+        <div class="team-card reveal">
+
+          <span class="role-badge role-mod">Moderator</span>
+
+          <div class="team-avatar">
+            <img src="../assets/images/team/test.png" loading="lazy" decoding="async" alt="team member">
+          </div>
+
+
+          <div class="team-body">
+
+            <div class="team-name">Sina</div>
+            <div class="team-role">Community Moderator</div>
+
+          </div>
+
         </div>
 
 
-        <div class="team-body">
+        <div class="team-card reveal">
 
-          <div class="team-name">Amir</div>
-          <div class="team-role">Community Moderator</div>
+          <span class="role-badge role-mod">Moderator</span>
+
+          <div class="team-avatar">
+            <img src="../assets/images/team/test.png" loading="lazy" decoding="async" alt="team member">
+          </div>
+
+
+          <div class="team-body">
+
+            <div class="team-name">Arman</div>
+            <div class="team-role">Community Moderator</div>
+
+          </div>
+
+        </div>
+
+
+        <div class="team-card reveal">
+
+          <span class="role-badge role-mod">Moderator</span>
+
+          <div class="team-avatar">
+            <img src="../assets/images/team/test.png" loading="lazy" decoding="async" alt="team member">
+          </div>
+
+
+          <div class="team-body">
+
+            <div class="team-name">Amir</div>
+            <div class="team-role">Community Moderator</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DEVELOPERS -->
+
+    <section class="container">
+
+      <h2 class="section-title">توسعه دهندگان</h2>
+
+      <div class="team-grid">
+
+        <div class="team-card reveal">
+
+          <span class="role-badge role-dev">Developer</span>
+
+          <div class="team-avatar">
+            <img src="../assets/images/team/test.png" loading="lazy" decoding="async" alt="team member">
+          </div>
+
+
+          <div class="team-body">
+
+            <div class="team-name">Matin</div>
+
+            <div class="team-role">Web & VMP Developer</div>
+
+          </div>
 
         </div>
 
       </div>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- DEVELOPERS -->
+    <!-- CTA -->
 
-  <section class="container">
+    <section class="cta">
 
-    <h2 class="section-title">توسعه دهندگان</h2>
+      <div class="cta-bg"></div>
 
-    <div class="team-grid">
+      <div class="container cta-content">
 
-      <div class="team-card reveal">
+        <h2>به جامعه NOX بپیوند</h2>
 
-        <span class="role-badge role-dev">Developer</span>
+        <p>
+          اگر آماده تجربه یک رول‌پلی حرفه‌ای هستی، همین حالا وارد سرور شو.
+        </p>
 
-        <div class="team-avatar">
-          <img src="../../assets/images/team/test.png" alt="team member">
-        </div>
+        <div class="cta-actions">
 
+          <a href="join.html" class="btn primary big">
+            ورود به سرور
+          </a>
 
-        <div class="team-body">
+          <div class="cta-ip">
+            connect sv.nox-rp.ir
+          </div>
 
-          <div class="team-name">Matin</div>
-
-          <div class="team-role">Web & VMP Developer</div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- CTA -->
-
-  <section class="cta">
-
-    <div class="cta-bg"></div>
-
-    <div class="container cta-content">
-
-      <h2>به جامعه NOX بپیوند</h2>
-
-      <p>
-        اگر آماده تجربه یک رول‌پلی حرفه‌ای هستی، همین حالا وارد سرور شو.
-      </p>
-
-      <div class="cta-actions">
-
-        <a href="join.html" class="btn primary big">
-          ورود به سرور
-        </a>
-
-        <div class="cta-ip">
-          connect sv.nox-rp.ir
         </div>
 
       </div>
 
-    </div>
-
-  </section>
-
+    </section>
+  </main>
 
   <footer class="footer">
 
@@ -316,7 +336,7 @@
 
         <div class="footer-logo">
 
-          <img src="../../assets/logos/logo-main.png" alt="NOX RP">
+          <img src="../assets/logos/logo-main.png" alt="NOX RP">
           <h3>NOX RP</h3>
 
         </div>
@@ -345,7 +365,7 @@
       <div class="footer-links">
 
         <h4>دسترسی سریع</h4>
-        
+
         <a href="../index.html">خانه</a>
         <a href="join.html">ورود به سرور</a>
         <a href="rules.html">قوانین</a>
@@ -395,10 +415,10 @@
 
   </footer>
 
-  <div id="toast-container"></div>
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
-  <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/security.js"></script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/security.js" defer></script>
 
 </body>
 
