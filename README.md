@@ -1,131 +1,197 @@
-# NOX Roleplay Website
+<div dir="rtl" align="center">
 
-وب‌سایت رسمی سرور **NOX Roleplay**؛ یک وب‌سایت مدرن، سبک، ریسپانسیو و فارسی برای معرفی سرور رول‌پلی، راهنمای ورود، قوانین، شغل‌ها، تیم، سوالات متداول و راه‌های ارتباطی.
+# وب‌سایت رسمی NOX Roleplay
 
-این پروژه با تمرکز روی طراحی مدرن، تجربه کاربری روان، پشتیبانی کامل از زبان فارسی و ساختار مناسب برای انتشار Production توسعه داده شده است.
+وب‌سایت رسمی سرور **NOX Roleplay**؛ یک وب‌سایت مدرن، سبک، فارسی، راست‌چین، ریسپانسیو و آماده انتشار برای معرفی سرور رول‌پلی، راهنمای ورود، قوانین، شغل‌ها، تیم مدیریت، سوالات متداول و راه‌های ارتباطی.
 
-## 🔗 Live Website
+<br>
+
+[![وضعیت پروژه](https://img.shields.io/badge/وضعیت-Stable-4ade80?style=for-the-badge)](#-وضعیت-پروژه)
+[![نسخه](https://img.shields.io/badge/نسخه-v1.1.1-ff7878?style=for-the-badge)](#-تاریخچه-نسخهها)
+[![تکنولوژی](https://img.shields.io/badge/HTML%20%7C%20CSS%20%7C%20JS-Vanilla-60a5fa?style=for-the-badge)](#-تکنولوژیهای-استفادهشده)
+[![زبان](https://img.shields.io/badge/زبان-فارسی%20RTL-facc15?style=for-the-badge)](#-پشتیبانی-از-زبان-فارسی)
+
+<br>
+
+**طراحی رابط کاربری و توسعه وب‌سایت توسط [Matin Shahabadi](https://matinshahabadi.ir)**
+
+</div>
+
+## فهرست مطالب
+
+- [معرفی پروژه](#-معرفی-پروژه)
+- [لینک وب‌سایت](#-لینک-وبسایت)
+- [هدف پروژه](#-هدف-پروژه)
+- [ویژگی‌ها](#-ویژگیها)
+- [صفحات پروژه](#-صفحات-پروژه)
+- [ساختار پروژه](#-ساختار-پروژه)
+- [تکنولوژی‌های استفاده‌شده](#-تکنولوژیهای-استفادهشده)
+- [سیستم طراحی](#-سیستم-طراحی)
+- [ساختار ریسپانسیو](#-ساختار-ریسپانسیو)
+- [فایل‌های JavaScript](#-فایلهای-javascript)
+- [لینک‌ها و آدرس‌های مهم](#-لینکها-و-آدرسهای-مهم)
+- [نحوه اجرا](#-نحوه-اجرا)
+- [توسعه محلی](#-توسعه-محلی)
+- [انتشار پروژه](#-انتشار-پروژه)
+- [چک‌لیست Production](#-چکلیست-production)
+- [چک‌لیست SEO](#-چکلیست-seo)
+- [چک‌لیست دسترسی‌پذیری](#-چکلیست-دسترسیپذیری)
+- [طراح و توسعه‌دهنده](#-طراح-و-توسعهدهنده)
+- [تاریخچه نسخه‌ها](#-تاریخچه-نسخهها)
+- [وضعیت پروژه](#-وضعیت-پروژه)
+- [مجوز استفاده](#-مجوز-استفاده)
+- [ارتباط](#-ارتباط)
+
+## معرفی پروژه
+
+**NOX Roleplay Website** وب‌سایت رسمی سرور **NOX Roleplay** است که با هدف ارائه یک تجربه کاربری حرفه‌ای، سریع، ریسپانسیو و فارسی برای کاربران سرور طراحی و توسعه داده شده است.
+
+این پروژه به‌صورت **Static** و **Frontend-Only** ساخته شده و بدون استفاده از فریم‌ورک‌های سنگین، با ترکیب `HTML5`، `CSS3` و `Vanilla JavaScript` پیاده‌سازی شده است.
+
+تمرکز اصلی پروژه روی موارد زیر است:
+
+- طراحی مدرن و هماهنگ با فضای Gaming و Roleplay
+- پشتیبانی کامل از زبان فارسی و ساختار راست‌چین
+- تجربه کاربری روان در موبایل، تبلت و دسکتاپ
+- ساختار مناسب برای SEO و انتشار Production
+- عملکرد سریع و سبک
+- ساختار فایل‌بندی تمیز و قابل نگهداری
+
+## لینک وب‌سایت
+
+وب‌سایت اصلی پروژه:
 
 ```txt
 https://nox-rp.ir
 ```
 
-## 📌 About Project
+## هدف پروژه
 
-NOX Roleplay Website یک وب‌سایت Static و Frontend-Only است که برای معرفی و مدیریت محتوای عمومی سرور NOX Roleplay طراحی شده است.
+هدف این وب‌سایت، ایجاد یک مرجع رسمی و کامل برای کاربران سرور NOX Roleplay است.
 
-هدف اصلی پروژه:
+| بخش           | توضیح                                     |
+| ------------- | ----------------------------------------- |
+| معرفی سرور    | ارائه توضیحات کلی درباره NOX Roleplay     |
+| ورود به سرور  | راهنمای اتصال کاربران به سرور             |
+| قوانین        | نمایش قوانین اصلی و دسته‌بندی‌شده         |
+| شغل‌ها        | معرفی شغل‌ها و مسیرهای رول‌پلی            |
+| تیم           | معرفی اعضای تیم مدیریت                    |
+| سوالات متداول | پاسخ به سوالات پرتکرار کاربران            |
+| تماس          | ارائه راه‌های ارتباطی و پشتیبانی          |
+| تجربه کاربری  | بهینه‌سازی رابط کاربری برای همه دستگاه‌ها |
 
-- معرفی سرور NOX Roleplay
-- راهنمای ورود کاربران به سرور
-- نمایش قوانین و اطلاعات مهم
-- معرفی شغل‌ها و سیستم‌های سرور
-- نمایش تیم مدیریت
-- پاسخ به سوالات متداول
-- ارائه راه‌های ارتباطی
-- بهینه‌سازی تجربه کاربری برای کاربران موبایل و دسکتاپ
+## ویژگی‌ها
 
-## ✨ Features
+### طراحی مدرن و تجربه کاربری
 
-### 🎨 Modern UI / UX
-
-- طراحی Dark Mode مدرن
-- رابط کاربری فارسی و RTL
-- طراحی هماهنگ با فضای Gaming / Roleplay
-- استفاده از افکت‌های Glassmorphism
-- انیمیشن‌های نرم و سبک
-- کارت‌های مدرن برای بخش‌های مختلف
+- طراحی Dark Mode حرفه‌ای
+- رابط کاربری فارسی و راست‌چین
+- ظاهر هماهنگ با فضای Gaming / Roleplay
+- استفاده از Glassmorphism
+- کارت‌های مدرن با Shadow و Border نرم
 - دکمه‌های تعاملی با Hover و Active State
 - Toast Notification برای نمایش پیام‌های کاربر
+- طراحی فوتر حرفه‌ای همراه با امضای طراح و توسعه‌دهنده
 
-### 📱 Fully Responsive
+### ریسپانسیو کامل
 
 وب‌سایت برای اندازه‌های مختلف صفحه بهینه شده است:
 
-- Desktop
-- Laptop
-- Tablet
-- Mobile
-- Small Mobile Devices
+| دستگاه          | وضعیت     |
+| --------------- | --------- |
+| دسکتاپ          | بهینه‌شده |
+| لپ‌تاپ          | بهینه‌شده |
+| تبلت            | بهینه‌شده |
+| موبایل          | بهینه‌شده |
+| موبایل‌های کوچک | بهینه‌شده |
 
 در نسخه موبایل:
 
 - منوی Hamburger حرفه‌ای
-- چینش بهتر کارت‌ها
 - اندازه متن استاندارد
 - فاصله‌گذاری مناسب
-- تجربه کاربری بهینه برای لمس
+- چینش بهتر کارت‌ها
+- تجربه کاربری مناسب برای لمس
+- فوتر و دکمه‌های سازگار با نمایشگر کوچک
 
-### 🌐 Persian RTL Support
+### پشتیبانی از زبان فارسی
 
-- پشتیبانی کامل از زبان فارسی
-- ساختار `dir="rtl"`
+پروژه به‌صورت کامل برای زبان فارسی آماده شده است:
+
+- استفاده از `dir="rtl"`
 - فونت فارسی Vazirmatn
-- چینش صحیح متن‌ها، کارت‌ها، منو و فوتر
-- بهینه‌سازی خوانایی متن فارسی
+- چینش صحیح متن‌ها، منوها، کارت‌ها و فوتر
+- خوانایی مناسب متن فارسی
+- بهینه‌سازی فاصله خطوط و اندازه فونت‌ها
+- پشتیبانی از ساختار راست‌چین در تمام صفحات
 
-### 🔍 SEO Ready
+### آماده برای SEO
 
-پروژه دارای ساختار مناسب برای SEO است:
+پروژه دارای ساختار مناسب برای بهینه‌سازی موتورهای جستجو است:
 
-- Meta Description اختصاصی برای صفحات
+- عنوان اختصاصی برای صفحات
+- Meta Description اختصاصی
 - Canonical URL
+- Robots Meta
 - Open Graph Tags
 - Twitter Card Metadata
-- Robots Meta
 - Structured Data با JSON-LD
 - ساختار Semantic HTML
-- عنوان‌های صفحه مناسب
-- تصاویر دارای Alt Text
+- Alt Text برای تصاویر اصلی
+- طراحی Mobile Friendly
 
-### ♿ Accessibility
+### دسترسی‌پذیری
 
-برای دسترسی‌پذیری بهتر:
+برای تجربه بهتر کاربران و پشتیبانی از ابزارهای کمکی:
 
 - استفاده از `aria-label`
 - پشتیبانی از Keyboard Navigation
-- Focus State مناسب
+- Focus State مشخص
 - Skip Link برای رفتن به محتوای اصلی
-- ساختار بهتر برای Screen Reader
+- ساختار مناسب برای Screen Reader
 - دکمه Hamburger با `aria-expanded`
 - FAQ قابل کنترل با کیبورد
 - عناصر قابل کپی با `role="button"` و `tabindex`
 
-### ⚡ Performance
+### عملکرد و سرعت
+
+پروژه سبک، سریع و مناسب انتشار روی هاست‌های Static است.
 
 - بدون فریم‌ورک
 - Vanilla JavaScript
-- CSS سبک و اختصاصی
+- CSS اختصاصی و سبک
 - Font Preload
 - Image Preload برای لوگوهای مهم
 - Lazy Loading برای تصاویر غیرضروری
 - ساختار Asset مرتب
-- مناسب برای هاست Static
+- مناسب برای cPanel، GitHub Pages، Netlify، Vercel و Cloudflare Pages
 
-### 🧩 PWA Ready
+### آماده برای PWA
 
-پروژه دارای فایل Manifest است و برای استفاده به‌عنوان PWA آماده‌سازی شده:
+پروژه دارای تنظیمات اولیه PWA است:
 
-- `site.webmanifest`
+- فایل `site.webmanifest`
 - Theme Color
 - App Icons
 - Mobile Friendly Config
+- قابلیت توسعه برای نصب‌پذیری در آینده
 
-## 📄 Pages
+## صفحات پروژه
 
-پروژه شامل صفحات زیر است:
+| صفحه          | مسیر فایل            | توضیحات                                        |
+| ------------- | -------------------- | ---------------------------------------------- |
+| صفحه اصلی     | `index.html`         | معرفی سرور، ویژگی‌ها، آمار، گالری، اخبار و CTA |
+| ورود به سرور  | `pages/join.html`    | راهنمای اتصال، مراحل ورود و مشکلات رایج        |
+| قوانین        | `pages/rules.html`   | قوانین اصلی، دسته‌بندی‌ها و جستجو              |
+| شغل‌ها        | `pages/jobs.html`    | معرفی شغل‌ها و مسیرهای رول‌پلی                 |
+| تیم           | `pages/team.html`    | معرفی اعضای تیم مدیریت                         |
+| سوالات متداول | `pages/faq.html`     | FAQ تعاملی همراه با جستجو                      |
+| تماس          | `pages/contact.html` | راه‌های ارتباطی، TeamSpeak و IP سرور           |
 
-```txt
-index.html
-pages/join.html
-pages/rules.html
-pages/jobs.html
-pages/team.html
-pages/faq.html
-pages/contact.html
-```
+<details>
+<summary><strong>جزئیات صفحات</strong></summary>
 
-### Home Page
+### صفحه اصلی
 
 فایل:
 
@@ -145,7 +211,7 @@ index.html
 - CTA
 - Footer
 
-### Join Page
+### صفحه ورود به سرور
 
 فایل:
 
@@ -163,7 +229,7 @@ pages/join.html
 - راهنمای TeamSpeak
 - مشکلات رایج ورود
 
-### Rules Page
+### صفحه قوانین
 
 فایل:
 
@@ -179,7 +245,7 @@ pages/rules.html
 - ساختار مناسب برای مطالعه سریع
 - قابلیت جستجو در قوانین
 
-### Jobs Page
+### صفحه شغل‌ها
 
 فایل:
 
@@ -194,7 +260,7 @@ pages/jobs.html
 - کارت‌های شغلی
 - توضیحات مربوط به مسیرهای Roleplay
 
-### Team Page
+### صفحه تیم
 
 فایل:
 
@@ -209,7 +275,7 @@ pages/team.html
 - نقش‌ها و Badgeها
 - طراحی Avatar مدرن
 
-### FAQ Page
+### صفحه سوالات متداول
 
 فایل:
 
@@ -224,7 +290,7 @@ pages/faq.html
 - قابلیت جستجو
 - پشتیبانی از کیبورد و Accessibility
 
-### Contact Page
+### صفحه تماس
 
 فایل:
 
@@ -240,9 +306,9 @@ pages/contact.html
 - لینک‌های ارتباطی
 - کارت‌های تماس
 
-## 🗂️ Project Structure
+</details>
 
-ساختار کلی پروژه:
+## ساختار پروژه
 
 ```txt
 nox-website/
@@ -287,25 +353,22 @@ nox-website/
 │           └── Vazirmatn-Bold.woff2
 ```
 
-## 🧱 Tech Stack
+## تکنولوژی‌های استفاده‌شده
 
-این پروژه بدون استفاده از فریم‌ورک توسعه داده شده است.
+| تکنولوژی           | کاربرد                                 |
+| ------------------ | -------------------------------------- |
+| HTML5              | ساختار صفحات                           |
+| CSS3               | طراحی، Layout، Responsive و انیمیشن‌ها |
+| Vanilla JavaScript | تعاملات سایت بدون فریم‌ورک             |
+| Vazirmatn Font     | تایپوگرافی فارسی                       |
+| PWA Manifest       | آماده‌سازی اولیه برای PWA              |
+| JSON-LD            | ساختار داده برای SEO                   |
 
-```txt
-HTML5
-CSS3
-Vanilla JavaScript
-Vazirmatn Font
-PWA Manifest
-```
-
-## 🎨 Design System
+## سیستم طراحی
 
 پروژه دارای Design System اختصاصی داخل فایل `style.css` است.
 
-### Colors
-
-رنگ اصلی پروژه:
+### رنگ‌های اصلی
 
 ```css
 --primary: #ff7878;
@@ -313,7 +376,7 @@ PWA Manifest
 --primary-dark: #e05f5f;
 ```
 
-رنگ‌های پس‌زمینه:
+### رنگ‌های پس‌زمینه
 
 ```css
 --bg-main: #0b1120;
@@ -321,7 +384,7 @@ PWA Manifest
 --bg-tertiary: #151c2c;
 ```
 
-رنگ‌های متنی:
+### رنگ‌های متن
 
 ```css
 --text-main: #e6edf6;
@@ -329,9 +392,7 @@ PWA Manifest
 --text-heading: #ffffff;
 ```
 
-### UI Style
-
-سبک طراحی:
+### سبک بصری
 
 - Dark Gaming UI
 - Glassmorphism
@@ -341,7 +402,7 @@ PWA Manifest
 - Persian RTL Layout
 - Modern 2026 Visual Style
 
-## 📱 Responsive Breakpoints
+## ساختار ریسپانسیو
 
 فایل `responsive.css` شامل Breakpointهای اصلی زیر است:
 
@@ -358,11 +419,11 @@ PWA Manifest
 - خوانایی بهتر روی گوشی
 - هماهنگی فوتر، دکمه‌ها و کارت‌ها در صفحه‌های کوچک
 
-## ⚙️ JavaScript Files
+## فایل‌های JavaScript
 
-### `main.js`
+### فایل `main.js`
 
-فایل اصلی اسکریپت‌های سایت.
+فایل اصلی اسکریپت‌های سایت است.
 
 مسئولیت‌ها:
 
@@ -376,9 +437,9 @@ PWA Manifest
 - FAQ Search
 - Rules Search
 
-### `security.js`
+### فایل `security.js`
 
-فایل مربوط به محافظت‌های ساده Frontend.
+فایل مربوط به محافظت‌های ساده Frontend است.
 
 مسئولیت‌ها:
 
@@ -386,59 +447,43 @@ PWA Manifest
 - محافظت ساده از محتوا در سطح Frontend
 - افزایش کنترل روی تعاملات کاربر
 
-> توجه: امنیت واقعی باید در Backend و سطح Server انجام شود. این فایل فقط یک لایه ساده Frontend است.
+> [!WARNING]
+> امنیت واقعی باید در Backend، Server و سطح Infrastructure انجام شود. فایل `security.js` فقط یک لایه ساده Frontend است و جایگزین امنیت واقعی نیست.
 
-### `ts-status.js`
+### فایل `ts-status.js`
 
-فایل مربوط به وضعیت TeamSpeak.
+فایل مربوط به وضعیت TeamSpeak است.
 
 مسئولیت‌ها:
 
 - دریافت وضعیت TeamSpeak
-- نمایش وضعیت آنلاین/آفلاین
+- نمایش وضعیت آنلاین یا آفلاین
 - نمایش تعداد کاربران در صورت پشتیبانی API
 - مدیریت وضعیت Loading و Error
 
-## 🔗 Important Links
+## لینک‌ها و آدرس‌های مهم
 
-آدرس اتصال سرور:
+| مورد                | مقدار                            |
+| ------------------- | -------------------------------- |
+| آدرس وب‌سایت        | `https://nox-rp.ir`              |
+| آدرس اتصال سرور     | `connect sv.nox-rp.ir`           |
+| اتصال مستقیم        | `vmp://connect/sv.nox-rp.ir`     |
+| اتصال TeamSpeak     | `ts3server://sv.nox-rp.ir`       |
+| وب‌سایت توسعه‌دهنده | `https://matinshahabadi.ir`      |
+| گیت‌هاب توسعه‌دهنده | `https://github.com/power0matin` |
 
-```txt
-connect sv.nox-rp.ir
-```
+## نحوه اجرا
 
-لینک اتصال مستقیم:
+برای اجرای پروژه، کافی است فایل `index.html` را در مرورگر باز کنید.
 
-```txt
-vmp://connect/sv.nox-rp.ir
-```
-
-لینک TeamSpeak:
-
-```txt
-ts3server://sv.nox-rp.ir
-```
-
-وب‌سایت طراح و توسعه‌دهنده:
-
-```txt
-https://matinshahabadi.ir
-```
-
-## 🚀 Getting Started
-
-برای اجرای پروژه، فقط کافی است فایل `index.html` را در مرورگر باز کنید.
-
-روش پیشنهادی برای توسعه محلی:
-
-### VS Code Live Server
+روش پیشنهادی:
 
 1. پروژه را در VS Code باز کنید
 2. افزونه Live Server را نصب کنید
-3. روی `index.html` راست‌کلیک کنید
-4. گزینه `Open with Live Server` را بزنید
+3. روی فایل `index.html` راست‌کلیک کنید
+4. گزینه `Open with Live Server` را انتخاب کنید
 
-## 🧪 Local Development
+## توسعه محلی
 
 این پروژه نیاز به نصب Package ندارد.
 
@@ -449,9 +494,12 @@ cd nox-website
 
 سپس فایل `index.html` را اجرا کنید یا از Live Server استفاده کنید.
 
-## 📦 Deployment
+> [!TIP]
+> برای جلوگیری از مشکل در مسیر فایل‌ها، بهتر است پروژه را با Live Server یا یک Local Server ساده اجرا کنید.
 
-چون پروژه Static است، می‌توان آن را روی سرویس‌های زیر Deploy کرد:
+## انتشار پروژه
+
+چون پروژه Static است، می‌توان آن را روی سرویس‌های مختلف منتشر کرد:
 
 - Direct Hosting
 - cPanel
@@ -462,14 +510,14 @@ cd nox-website
 - Vercel
 - Cloudflare Pages
 
-برای Deploy روی هاست معمولی:
+### انتشار روی هاست معمولی
 
 1. همه فایل‌ها را Upload کنید
-2. `index.html` باید در Root هاست قرار بگیرد
+2. فایل `index.html` باید در Root هاست قرار بگیرد
 3. پوشه‌های `assets` و `pages` باید کنار `index.html` باشند
 4. مسیر فایل‌ها را تغییر ندهید
 
-## ✅ Production Checklist
+## چک‌لیست Production
 
 قبل از انتشار نهایی:
 
@@ -490,25 +538,25 @@ cd nox-website
 - [ ] بررسی سرعت سایت
 - [ ] بررسی Console مرورگر برای Error
 
-## 🔍 SEO Checklist
+## چک‌لیست SEO
 
-موارد SEO پیاده‌سازی‌شده:
+موارد پیاده‌سازی‌شده:
 
-- [x] Title اختصاصی
+- [x] Title اختصاصی برای صفحات
 - [x] Meta Description
 - [x] Canonical URL
 - [x] Robots Meta
-- [x] Open Graph
-- [x] Twitter Card
+- [x] Open Graph Tags
+- [x] Twitter Card Metadata
 - [x] JSON-LD Structured Data
 - [x] Alt Text برای تصاویر اصلی
 - [x] Semantic HTML
 - [x] Responsive Design
 - [x] Mobile Friendly Layout
 
-## ♿ Accessibility Checklist
+## چک‌لیست دسترسی‌پذیری
 
-موارد Accessibility پیاده‌سازی‌شده:
+موارد پیاده‌سازی‌شده:
 
 - [x] Skip Link
 - [x] ARIA Label
@@ -520,29 +568,20 @@ cd nox-website
 - [x] Semantic Page Structure
 - [x] Proper Button Elements
 
-## 🧑‍💻 Author
+## طراح و توسعه‌دهنده
 
 طراحی رابط کاربری و توسعه وب‌سایت توسط:
 
-```txt
-Matin Shahabadi
-```
+**Matin Shahabadi**
 
-Website:
+| مورد    | لینک                             |
+| ------- | -------------------------------- |
+| وب‌سایت | `https://matinshahabadi.ir`      |
+| GitHub  | `https://github.com/power0matin` |
 
-```txt
-https://matinshahabadi.ir
-```
+## تاریخچه نسخه‌ها
 
-GitHub:
-
-```txt
-https://github.com/power0matin
-```
-
-## 🏷️ Version History
-
-### v1.0.0 - Initial Production Release
+### نسخه `v1.0.0` — انتشار اولیه Production
 
 اولین نسخه پایدار پروژه.
 
@@ -556,7 +595,7 @@ https://github.com/power0matin
 - اسکریپت‌های پایه
 - ساختار Production Ready
 
-### v1.1.0 - UI/UX, SEO & Responsive Stability Update
+### نسخه `v1.1.0` — بهبود UI/UX، SEO و پایداری Responsive
 
 به‌روزرسانی اصلی برای بهبود تجربه کاربری و ساختار سایت.
 
@@ -566,12 +605,12 @@ https://github.com/power0matin
 - اصلاح Responsive
 - بهبود SEO
 - بهبود Accessibility
-- اصلاح Join Page
+- اصلاح صفحه Join
 - بهبود فوتر
 - بهینه‌سازی JavaScript
 - بهبود ساختار HTML صفحات
 
-### v1.1.1 - Designer Credit & Footer Branding Update
+### نسخه `v1.1.1` — امضای طراح و بهبود برندینگ فوتر
 
 به‌روزرسانی Patch برای اضافه شدن امضای طراح و توسعه‌دهنده سایت.
 
@@ -583,26 +622,26 @@ https://github.com/power0matin
 - بهبود Responsive فوتر
 - هماهنگ‌سازی Footer Branding در صفحات
 
-## 📌 Project Status
+## وضعیت پروژه
 
-```txt
-Stable
-Production Ready
-Actively Maintained
-```
+| وضعیت               | توضیح                    |
+| ------------------- | ------------------------ |
+| Stable              | پروژه پایدار است         |
+| Production Ready    | آماده انتشار است         |
+| Actively Maintained | قابل نگهداری و توسعه است |
 
-## 📄 License
+## مجوز استفاده
 
-این پروژه برای وب‌سایت رسمی NOX Roleplay توسعه داده شده است.
+این پروژه برای وب‌سایت رسمی **NOX Roleplay** توسعه داده شده است.
 
-استفاده، کپی، بازنشر یا فروش این پروژه بدون اجازه مالک پروژه مجاز نیست.
+استفاده، کپی، بازنشر، فروش یا استفاده تجاری از این پروژه بدون اجازه مالک پروژه مجاز نیست.
 
 ```txt
 © 2026 NOX Roleplay. All rights reserved.
 Designed and developed by Matin Shahabadi.
 ```
 
-## 💬 Contact
+## ارتباط
 
 برای ارتباط با تیم NOX Roleplay از صفحه تماس سایت استفاده کنید:
 
@@ -615,3 +654,11 @@ https://nox-rp.ir/pages/contact.html
 ```txt
 https://matinshahabadi.ir
 ```
+
+<div dir="rtl" align="center">
+
+ساخته‌شده با تمرکز روی سرعت، زیبایی، تجربه کاربری و پشتیبانی کامل از زبان فارسی.
+
+**NOX Roleplay Website — Designed & Developed by Matin Shahabadi**
+
+</div>
