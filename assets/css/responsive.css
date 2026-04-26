@@ -621,3 +621,36 @@
     transform: none;
   }
 }
+
+/* Premium designer credit responsive */
+@media (max-width: 600px) {
+  .footer-made {
+    width: 100%;
+    gap: 7px;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .footer-made-link {
+    min-height: 32px;
+    padding: 5px 10px 5px 6px;
+    font-size: 13.5px;
+  }
+
+  .footer-made-mark {
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 360px) {
+  .footer-made {
+    gap: 5px;
+    font-size: 12.5px;
+  }
+
+  .footer-made-link {
+    font-size: 13px;
+  }
+}
