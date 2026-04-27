@@ -7,7 +7,7 @@
 <br>
 
 [![وضعیت پروژه](https://img.shields.io/badge/وضعیت-Stable-4ade80?style=for-the-badge)](#-وضعیت-پروژه)
-[![نسخه](https://img.shields.io/badge/نسخه-v1.1.1-ff7878?style=for-the-badge)](#-تاریخچه-نسخهها)
+[![نسخه](https://img.shields.io/badge/نسخه-v1.2.0-ff7878?style=for-the-badge)](#-تاریخچه-نسخهها)
 [![تکنولوژی](https://img.shields.io/badge/HTML%20%7C%20CSS%20%7C%20JS-Vanilla-60a5fa?style=for-the-badge)](#-تکنولوژیهای-استفادهشده)
 [![زبان](https://img.shields.io/badge/زبان-فارسی%20RTL-facc15?style=for-the-badge)](#-پشتیبانی-از-زبان-فارسی)
 
@@ -595,7 +595,7 @@ cd nox-website
 - اسکریپت‌های پایه
 - ساختار Production Ready
 
-### نسخه `v1.1.0` — بهبود UI/UX، SEO و پایداری Responsive
+### نسخه `v1.2.0` — بهبود UI/UX، SEO و پایداری Responsive
 
 به‌روزرسانی اصلی برای بهبود تجربه کاربری و ساختار سایت.
 
@@ -610,7 +610,7 @@ cd nox-website
 - بهینه‌سازی JavaScript
 - بهبود ساختار HTML صفحات
 
-### نسخه `v1.1.1` — امضای طراح و بهبود برندینگ فوتر
+### نسخه `v1.2.0` — امضای طراح و بهبود برندینگ فوتر
 
 به‌روزرسانی Patch برای اضافه شدن امضای طراح و توسعه‌دهنده سایت.
 
