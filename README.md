@@ -662,3 +662,19 @@ https://matinshahabadi.ir
 **NOX Roleplay Website — Designed & Developed by Matin Shahabadi**
 
 </div>
+
+## Account and subscription implementation notes
+
+This project includes a frontend-ready account and subscription system implemented in `assets/js/account.js`.
+
+Current behavior:
+- Accounts are stored in browser `localStorage` as a mock development implementation.
+- Auth states include logged out, login, signup, validation errors, loading states, logged in, and logout.
+- Protected pages (`profile.html`, `account-settings.html`, `dashboard.html`) require a logged-in user.
+- Subscription checkout is a polished placeholder flow that writes the selected plan to local storage.
+
+Production replacement points:
+- Replace the `apiAdapter` methods in `assets/js/account.js` with real backend calls.
+- Do not store passwords in local storage in production.
+- Connect subscription checkout to Stripe, Paddle, or a local payment provider.
+- Verify payment webhooks server-side and store queue-priority entitlements in a trusted backend.

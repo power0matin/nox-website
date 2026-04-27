@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="color-scheme" content="dark">
+  <title>تنظیمات حساب | NOX Roleplay</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body data-protected="true">
+  <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a class="logo" href="../index.html" aria-label="صفحه اصلی NOX Roleplay">
+        <img src="../assets/logos/logo-navbar.png" alt="لوگوی NOX Roleplay" width="34" height="34" decoding="async">
+        <span>NOX Roleplay</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="منوی اصلی سایت">
+        <a href="../index.html">خانه</a>
+        <a href="join.html">ورود به سرور</a>
+        <a href="rules.html">قوانین</a>
+        <a href="jobs.html">شغل‌ها</a>
+        <a href="team.html">تیم</a>
+        <a href="faq.html">سوالات</a>
+        <a href="contact.html">تماس</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" type="button" aria-label="باز کردن منوی سایت" aria-controls="navLinks"
+        aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobileOverlay" class="mobile-overlay" hidden></div>
+
+  <main id="main-content">
+    <section class="page-hero protected-content" hidden>
+      <div class="container">
+        <span class="auth-badge">Settings</span>
+        <h1>تنظیمات حساب</h1>
+        <p>اطلاعات حساب، امنیت ورود و ترجیحات ارتباطی خود را مدیریت کنید.</p>
+      </div>
+    </section>
+
+    <section class="account-page container protected-content" hidden>
+      <div class="account-grid account-grid-polished">
+        <aside class="profile-summary profile-summary-pro">
+          <span class="user-avatar large account-hero-avatar" data-account-avatar aria-hidden="true">?</span>
+          <h2 data-account-name>کاربر</h2>
+          <p data-account-email>email@example.com</p>
+
+          <div class="subscription-pill active">
+            اولویت: <span data-subscription-priority>اولویت معمولی</span>
+          </div>
+
+          <nav class="settings-nav" aria-label="بخش‌های تنظیمات حساب">
+            <a href="#profile-settings">اطلاعات اصلی</a>
+            <a href="#security-settings">امنیت ورود</a>
+            <a href="#notification-settings">اعلان‌ها</a>
+            <a href="#danger-zone">خروج از حساب</a>
+          </nav>
+        </aside>
+
+        <div class="account-stack">
+          <article class="account-card" id="profile-settings">
+            <div class="account-card-head">
+              <div>
+                <span class="auth-badge">Identity</span>
+                <h2>اطلاعات اصلی</h2>
+              </div>
+            </div>
+
+            <p>نام نمایشی و ایمیل حساب خود را به‌روزرسانی کنید.</p>
+
+            <form id="accountSettingsForm" class="settings-form form-grid" novalidate>
+              <div class="form-field">
+                <label for="settingsName">نام نمایشی</label>
+                <input id="settingsName" name="name" type="text" minlength="2" autocomplete="name" required>
+                <small class="field-error" data-error-for="settingsName"></small>
+              </div>
+
+              <div class="form-field">
+                <label for="settingsEmail">ایمیل</label>
+                <input id="settingsEmail" name="email" type="email" autocomplete="email" required>
+                <small class="field-error" data-error-for="settingsEmail"></small>
+              </div>
+
+              <button class="btn primary settings-submit" type="submit">
+                ذخیره تغییرات
+              </button>
+            </form>
+          </article>
+
+          <article class="account-card" id="security-settings">
+            <div class="account-card-head">
+              <div>
+                <span class="auth-badge">Security</span>
+                <h2>امنیت و ورود</h2>
+              </div>
+            </div>
+
+            <div class="security-grid">
+              <div class="security-box">
+                <h3>رمز عبور</h3>
+                <p>برای حفظ امنیت حساب، رمز عبور خود را دوره‌ای تغییر دهید.</p>
+                <button class="btn ghost" type="button"
+                  data-placeholder-action="امکان تغییر رمز عبور به‌زودی فعال می‌شود.">
+                  تغییر رمز عبور
+                </button>
+              </div>
+
+              <div class="security-box">
+                <h3>نشست فعال</h3>
+                <p>شما در حال حاضر با این مرورگر وارد حساب شده‌اید.</p>
+                <span class="status-chip success">فعال</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="account-card" id="notification-settings">
+            <div class="account-card-head">
+              <div>
+                <span class="auth-badge">Preferences</span>
+                <h2>ترجیحات اعلان‌ها</h2>
+              </div>
+            </div>
+
+            <div class="preference-list">
+              <label>
+                <input type="checkbox" checked>
+                <span>اطلاع‌رسانی وضعیت صف و شلوغی سرور</span>
+              </label>
+
+              <label>
+                <input type="checkbox" checked>
+                <span>پیام‌های مهم قوانین، آپدیت‌ها و رویدادها</span>
+              </label>
+
+              <label>
+                <input type="checkbox">
+                <span>اطلاع‌رسانی پیشنهادهای اشتراک و تمدید پلن</span>
+              </label>
+            </div>
+          </article>
+
+          <article class="account-card danger-card" id="danger-zone">
+            <div class="account-card-head">
+              <div>
+                <span class="auth-badge">Session</span>
+                <h2>خروج از حساب</h2>
+              </div>
+            </div>
+
+            <p>در صورت خروج، برای مشاهده داشبورد و پروفایل باید دوباره وارد حساب شوید.</p>
+
+            <button class="btn ghost danger-action" type="button" data-settings-logout>
+              خروج از حساب
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="../assets/logos/logo-navbar.png" alt="NOX Roleplay">
+          <span>NOX Roleplay</span>
+        </div>
+        <p>سرور حرفه‌ای رول‌پلی فارسی با تجربه‌ای مدرن، منظم و جامعه‌ای فعال.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>دسترسی سریع</h4>
+        <a href="../index.html">خانه</a>
+        <a href="join.html">ورود به سرور</a>
+        <a href="rules.html">قوانین</a>
+        <a href="subscription.html">اشتراک</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>حساب کاربری</h4>
+        <a href="dashboard.html">داشبورد</a>
+        <a href="profile.html">پروفایل</a>
+        <a href="account-settings.html">تنظیمات</a>
+      </div>
+
+      <div class="footer-social">
+        <h4>شبکه‌های ما</h4>
+        <a href="#" class="social-btn">Discord</a>
+        <a href="#" class="social-btn">Instagram</a>
+        <a href="#" class="social-btn">YouTube</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-grid">
+        <span>© 2026 NOX Roleplay — تمامی حقوق محفوظ است</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/account.js" defer></script>
+</body>
+
+</html>

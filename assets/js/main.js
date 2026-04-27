@@ -9,20 +9,46 @@
   const TOAST_DURATION = 3200;
 
   const qs = (selector, scope = document) => scope.querySelector(selector);
-  const qsa = (selector, scope = document) => [
-    ...scope.querySelectorAll(selector),
-  ];
+  const qsa = (selector, scope = document) =>
+    Array.from(scope.querySelectorAll(selector));
+
+  const toastIcons = {
+    success: `
+      <svg class="toast-svg" viewBox="0 0 24 24" fill="none" focusable="false">
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
+    `,
+    error: `
+      <svg class="toast-svg" viewBox="0 0 24 24" fill="none" focusable="false">
+        <path d="M12 8v5" />
+        <path d="M12 17h.01" />
+        <path d="M10.3 4.4 2.8 17.4A2 2 0 0 0 4.5 20h15a2 2 0 0 0 1.7-2.6L13.7 4.4a2 2 0 0 0-3.4 0Z" />
+      </svg>
+    `,
+    info: `
+      <svg class="toast-svg" viewBox="0 0 24 24" fill="none" focusable="false">
+        <path d="M12 17v-6" />
+        <path d="M12 7h.01" />
+        <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+    `,
+  };
 
   function onReady(callback) {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", callback, { once: true });
-    } else {
-      callback();
+      return;
     }
+
+    callback();
   }
 
   function setText(el, value) {
-    if (el) el.textContent = value;
+    if (el) el.textContent = String(value ?? "");
+  }
+
+  function isInteractiveElement(el) {
+    return el.matches("button, a, input, textarea, select, summary, [role]");
   }
 
   async function copyText(text) {
@@ -35,23 +61,26 @@
         return true;
       }
     } catch (_) {
-      // Fallback below.
+      /* fallback below */
     }
 
     const textarea = document.createElement("textarea");
     textarea.value = value;
     textarea.setAttribute("readonly", "");
     textarea.style.position = "fixed";
-    textarea.style.inset = "0 auto auto 0";
+    textarea.style.top = "0";
+    textarea.style.left = "0";
     textarea.style.width = "1px";
     textarea.style.height = "1px";
     textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
 
     document.body.appendChild(textarea);
     textarea.focus({ preventScroll: true });
     textarea.select();
 
     let copied = false;
+
     try {
       copied = document.execCommand("copy");
     } catch (_) {
@@ -66,13 +95,20 @@
     const container = qs("#toast-container");
     if (!container) return;
 
-    const toast = document.createElement("div");
-    toast.className = `toast ${type}`;
-    toast.setAttribute("role", "status");
+    const safeType = ["success", "error", "info"].includes(type)
+      ? type
+      : "info";
 
-    const icon = type === "success" ? "✅" : type === "error" ? "⚠️" : "ℹ️";
+    const toast = document.createElement("div");
+    toast.className = `toast ${safeType}`;
+    toast.setAttribute("role", safeType === "error" ? "alert" : "status");
+    toast.setAttribute(
+      "aria-live",
+      safeType === "error" ? "assertive" : "polite",
+    );
+
     toast.innerHTML = `
-      <div class="toast-icon" aria-hidden="true">${icon}</div>
+      <div class="toast-icon" aria-hidden="true">${toastIcons[safeType]}</div>
       <div class="toast-text"></div>
       <button class="toast-close" type="button" aria-label="بستن پیام">×</button>
     `;
@@ -85,10 +121,16 @@
     function hideToast() {
       window.clearTimeout(timer);
       toast.classList.add("hide");
-      window.setTimeout(() => toast.remove(), 360);
+
+      window.setTimeout(() => {
+        toast.remove();
+      }, 360);
     }
 
-    toast.addEventListener("mouseenter", () => window.clearTimeout(timer));
+    toast.addEventListener("mouseenter", () => {
+      window.clearTimeout(timer);
+    });
+
     toast.addEventListener("mouseleave", () => {
       timer = window.setTimeout(hideToast, 1200);
     });
@@ -98,16 +140,25 @@
 
   function applyCopyFeedback(el, event) {
     const rect = el.getBoundingClientRect();
+
     const point =
-      event && "clientX" in event
-        ? { x: event.clientX - rect.left, y: event.clientY - rect.top }
-        : { x: rect.width / 2, y: rect.height / 2 };
+      event && typeof event.clientX === "number"
+        ? {
+            x: event.clientX - rect.left,
+            y: event.clientY - rect.top,
+          }
+        : {
+            x: rect.width / 2,
+            y: rect.height / 2,
+          };
 
     el.style.setProperty("--ripple-x", `${point.x}px`);
     el.style.setProperty("--ripple-y", `${point.y}px`);
 
     el.classList.remove("copy-success", "copy-animate", "copy-ripple");
+
     void el.offsetWidth;
+
     el.classList.add("copy-success", "copy-animate", "copy-ripple");
 
     window.setTimeout(() => {
@@ -130,7 +181,6 @@
       hamburger.setAttribute("aria-expanded", "true");
 
       navLinks.classList.add("open");
-
       overlay.hidden = false;
       overlay.classList.add("show");
 
@@ -144,8 +194,8 @@
       hamburger.setAttribute("aria-expanded", "false");
 
       navLinks.classList.remove("open");
-
       overlay.classList.remove("show");
+
       document.body.classList.remove("menu-open");
 
       window.setTimeout(() => {
@@ -176,10 +226,19 @@
   function initSmoothAnchors() {
     qsa('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (event) => {
-        const targetId = anchor.getAttribute("href");
-        if (!targetId || targetId === "#") return;
+        const href = anchor.getAttribute("href");
 
-        const target = qs(targetId);
+        if (!href || href === "#") return;
+
+        let target = null;
+
+        try {
+          const id = decodeURIComponent(href.slice(1));
+          target = document.getElementById(id);
+        } catch (_) {
+          target = null;
+        }
+
         if (!target) return;
 
         event.preventDefault();
@@ -204,10 +263,10 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observer.unobserve(entry.target);
-          }
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
         });
       },
       {
@@ -224,6 +283,10 @@
     if (!counters.length) return;
 
     function runCounter(counter) {
+      if (counter.dataset.counted === "true") return;
+
+      counter.dataset.counted = "true";
+
       const target = Number(counter.dataset.target || 0);
 
       if (!Number.isFinite(target) || target <= 0) {
@@ -256,13 +319,15 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            runCounter(entry.target);
-            observer.unobserve(entry.target);
-          }
+          if (!entry.isIntersecting) return;
+
+          runCounter(entry.target);
+          observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.55 },
+      {
+        threshold: 0.55,
+      },
     );
 
     counters.forEach((counter) => observer.observe(counter));
@@ -273,10 +338,14 @@
       ".server-ip, .footer-ip, .cta-ip, .contact-ip, .contact-ts, .step-ip";
 
     qsa(selectors).forEach((el) => {
-      if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "0");
-      if (!el.hasAttribute("role")) el.setAttribute("role", "button");
-      if (!el.hasAttribute("aria-label"))
+      if (!isInteractiveElement(el)) {
+        el.setAttribute("tabindex", "0");
+        el.setAttribute("role", "button");
+      }
+
+      if (!el.hasAttribute("aria-label")) {
         el.setAttribute("aria-label", "کپی مقدار");
+      }
 
       async function handleCopy(event) {
         event.preventDefault();
@@ -295,21 +364,20 @@
 
         if (ok) {
           applyCopyFeedback(el, event);
-          showToast(`کپی شد: ${value}`);
-        } else {
-          showToast(
-            "کپی خودکار انجام نشد. لطفا متن را دستی کپی کنید.",
-            "error",
-          );
+          showToast(`کپی شد: ${value}`, "success");
+          return;
         }
+
+        showToast("کپی خودکار انجام نشد. لطفا متن را دستی کپی کنید.", "error");
       }
 
       el.addEventListener("click", handleCopy);
 
       el.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          handleCopy(event);
-        }
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        event.preventDefault();
+        handleCopy(event);
       });
     });
   }
@@ -334,10 +402,10 @@
       question.addEventListener("click", toggle);
 
       question.addEventListener("keydown", (event) => {
-        if (event.key === "Enter" || event.key === " ") {
-          event.preventDefault();
-          toggle();
-        }
+        if (event.key !== "Enter" && event.key !== " ") return;
+
+        event.preventDefault();
+        toggle();
       });
     });
 
@@ -358,9 +426,9 @@
     const search = qs("#rulesSearch");
     if (!search) return;
 
-    const ruleCards = qsa(".card, .rule-card").filter((card) => {
-      return card.closest(".rules") || card.closest("main");
-    });
+    const scope =
+      search.closest("section") || search.closest("main") || document;
+    const ruleCards = qsa(".rule-card, .rules .card", scope);
 
     search.addEventListener("input", () => {
       const value = search.value.trim().toLocaleLowerCase("fa-IR");

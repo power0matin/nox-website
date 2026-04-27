@@ -70,10 +70,10 @@
 
     <div class="container nav-container">
 
-      <div class="logo">
-        <img src="../assets/logos/logo-navbar.png" alt="NOX Roleplay">
+      <a class="logo" href="../index.html" aria-label="صفحه اصلی NOX Roleplay">
+        <img src="../assets/logos/logo-navbar.png" alt="لوگوی NOX Roleplay" width="34" height="34" decoding="async">
         <span>NOX Roleplay</span>
-      </div>
+      </a>
 
       <nav class="nav-links" id="navLinks" aria-label="منوی اصلی سایت">
         <!-- این لینک‌ها در دسکتاپ دیده می‌شوند و در موبایل توسط CSS مخفی می‌شوند -->
@@ -108,64 +108,83 @@
 
         <div class="contact-grid">
 
-          <!-- Teamspeak -->
+          <!-- TeamSpeak -->
+          <article class="contact-card contact-card-premium" aria-labelledby="teamspeak-title">
 
-          <div class="contact-card">
+            <div class="contact-icon" aria-hidden="true">
+              <svg class="contact-icon-svg" viewBox="0 0 24 24" fill="none" focusable="false">
+                <path d="M4 13.5C4 8.25 7.58 4 12 4s8 4.25 8 9.5" />
+                <path
+                  d="M6.5 13.5h-1A1.5 1.5 0 0 0 4 15v2a1.5 1.5 0 0 0 1.5 1.5h1A1.5 1.5 0 0 0 8 17v-2a1.5 1.5 0 0 0-1.5-1.5Z" />
+                <path
+                  d="M18.5 13.5h-1A1.5 1.5 0 0 0 16 15v2a1.5 1.5 0 0 0 1.5 1.5h1A1.5 1.5 0 0 0 20 17v-2a1.5 1.5 0 0 0-1.5-1.5Z" />
+                <path d="M20 17v.75A3.25 3.25 0 0 1 16.75 21H13.5" />
+              </svg>
+            </div>
 
-            <div class="contact-icon">🎧</div>
-
-            <h3>TeamSpeak سرور</h3>
+            <h3 id="teamspeak-title">TeamSpeak سرور</h3>
 
             <p>
               برای ارتباط مستقیم با تیم مدیریت و پشتیبانی وارد TeamSpeak شوید.
             </p>
 
-            <div class="contact-ts">
+            <button type="button" class="contact-ts" data-copy="ts.nox-rp.ir" aria-label="کپی آدرس TeamSpeak">
               ts.nox-rp.ir
-            </div>
-            <div class="hero-buttons">
+            </button>
 
-              <a href="ts3server://ts.nox-rp.ir" class="btn primary contact-btn">
+            <div class="contact-actions">
+              <a href="ts3server://ts.nox-rp.ir" class="btn primary contact-btn" aria-label="اتصال مستقیم به TeamSpeak">
                 اتصال به TeamSpeak
               </a>
             </div>
 
-            <div id="ts-status" class="ts-status-card">
-              <div class="ts-status-header"> وضعیت TeamSpeak</div>
+            <section id="ts-status" class="ts-status-card" aria-labelledby="ts-status-title" aria-live="polite">
+              <div id="ts-status-title" class="ts-status-header">
+                وضعیت TeamSpeak
+              </div>
 
               <div class="ts-status-body">
-                <span id="ts-dot" class="ts-dot offline"></span>
+                <span id="ts-dot" class="ts-dot offline" aria-hidden="true"></span>
                 <span id="ts-text">درحال بررسی...</span>
               </div>
 
               <div class="ts-users">
-                کاربران: <span id="ts-users-count">0</span>
+                کاربران:
+                <span id="ts-users-count">0</span>
               </div>
-            </div>
+            </section>
 
-          </div>
-
+          </article>
 
           <!-- VMP -->
+          <article class="contact-card contact-card-premium" aria-labelledby="vmp-title">
 
-          <div class="contact-card">
+            <div class="contact-icon" aria-hidden="true">
+              <svg class="contact-icon-svg" viewBox="0 0 24 24" fill="none" focusable="false">
+                <path d="M8.25 10.25h7.5" />
+                <path d="M9 14h.01" />
+                <path d="M15 14h.01" />
+                <path
+                  d="M7.5 17.75h9A4.5 4.5 0 0 0 21 13.25v-2.5a4.5 4.5 0 0 0-4.5-4.5h-9A4.5 4.5 0 0 0 3 10.75v2.5a4.5 4.5 0 0 0 4.5 4.5Z" />
+                <path d="M8.5 6.25 7.75 4.5" />
+                <path d="M15.5 6.25l.75-1.75" />
+              </svg>
+            </div>
 
-            <div class="contact-icon">🎮</div>
-
-            <h3>ورود به سرور VMP</h3>
+            <h3 id="vmp-title">ورود به سرور VMP</h3>
 
             <p>
               برای ورود مستقیم به سرور NOX Roleplay از دستور زیر در F8 استفاده کنید.
             </p>
 
-            <div class="contact-ip">
+            <button type="button" class="contact-ip" data-copy="connect sv.nox-rp.ir"
+              aria-label="کپی دستور اتصال به سرور VMP">
               connect sv.nox-rp.ir
-            </div>
+            </button>
 
-          </div>
+          </article>
 
         </div>
-
 
       </div>
 
@@ -271,6 +290,7 @@
 
   <script src="../assets/js/ts-status.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/account.js" defer></script>
   <script src="../assets/js/security.js" defer></script>
 
 </body>

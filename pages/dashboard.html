@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="color-scheme" content="dark">
+  <title>داشبورد کاربری | NOX Roleplay</title>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body data-protected="true">
+  <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a class="logo" href="../index.html" aria-label="صفحه اصلی NOX Roleplay">
+        <img src="../assets/logos/logo-navbar.png" alt="لوگوی NOX Roleplay" width="34" height="34" decoding="async">
+        <span>NOX Roleplay</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="منوی اصلی سایت">
+        <a href="../index.html">خانه</a>
+        <a href="join.html">ورود به سرور</a>
+        <a href="rules.html">قوانین</a>
+        <a href="jobs.html">شغل‌ها</a>
+        <a href="team.html">تیم</a>
+        <a href="faq.html">سوالات</a>
+        <a href="contact.html">تماس</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" type="button" aria-label="باز کردن منوی سایت" aria-controls="navLinks"
+        aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobileOverlay" class="mobile-overlay" hidden></div>
+
+  <main id="main-content">
+    <section class="page-hero protected-content" hidden>
+      <div class="container">
+        <span class="auth-badge">Dashboard</span>
+        <h1>داشبورد کاربری</h1>
+        <p>نمای کامل وضعیت حساب، اشتراک، اولویت صف و مسیرهای مهم شما در NOX Roleplay.</p>
+      </div>
+    </section>
+
+    <section class="account-page container protected-content" hidden>
+      <div class="dashboard-welcome account-surface">
+        <div>
+          <span class="auth-badge">Welcome Back</span>
+          <h2>خوش آمدید، <span data-account-name>کاربر</span></h2>
+          <p>
+            از اینجا می‌توانید حساب، وضعیت اشتراک، اولویت صف و دسترسی‌های سریع خود را مدیریت کنید.
+          </p>
+        </div>
+
+        <div class="account-actions">
+          <a class="btn primary" href="subscription.html">مدیریت اشتراک</a>
+          <a class="btn ghost" href="profile.html">مشاهده پروفایل</a>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <article class="dashboard-card accent-card">
+          <span>Account</span>
+          <h2>حساب کاربری</h2>
+          <p data-account-email>email@example.com</p>
+          <strong data-account-name>کاربر</strong>
+        </article>
+
+        <article class="dashboard-card">
+          <span>Plan</span>
+          <h2>اشتراک فعال</h2>
+          <p>پلن فعلی شما</p>
+          <strong data-subscription-plan>رایگان</strong>
+        </article>
+
+        <article class="dashboard-card">
+          <span>Queue</span>
+          <h2>اولویت صف</h2>
+          <p>سطح ورود شما به سرور</p>
+          <strong data-subscription-priority>اولویت معمولی</strong>
+        </article>
+      </div>
+
+      <div class="dashboard-columns">
+        <article class="account-card">
+          <div class="account-card-head">
+            <div>
+              <span class="auth-badge">Quick Actions</span>
+              <h2>اقدام‌های سریع</h2>
+            </div>
+          </div>
+
+          <p>مسیرهای اصلی حساب و سرور همیشه در دسترس شما هستند.</p>
+
+          <div class="account-actions wrap-actions">
+            <a class="btn primary" href="join.html">ورود به سرور</a>
+            <a class="btn ghost" href="account-settings.html">تنظیمات حساب</a>
+            <a class="btn ghost" href="subscription.html">اشتراک و پرداخت</a>
+          </div>
+        </article>
+
+        <article class="account-card">
+          <div class="account-card-head">
+            <div>
+              <span class="auth-badge">Status</span>
+              <h2>وضعیت حساب</h2>
+            </div>
+          </div>
+
+          <ul class="account-list polished-list">
+            <li>
+              <span>وضعیت ورود</span>
+              <strong>فعال</strong>
+            </li>
+            <li>
+              <span>پلن اشتراک</span>
+              <strong data-subscription-plan>رایگان</strong>
+            </li>
+            <li>
+              <span>اولویت صف</span>
+              <strong data-subscription-priority>اولویت معمولی</strong>
+            </li>
+            <li>
+              <span>وضعیت پروفایل</span>
+              <strong>تکمیل‌شده</strong>
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="dashboard-columns">
+        <article class="account-card">
+          <div class="account-card-head">
+            <div>
+              <span class="auth-badge">Server Access</span>
+              <h2>دسترسی به سرور</h2>
+            </div>
+          </div>
+
+          <p>
+            برای ورود سریع‌تر به سرور، دستور اتصال را کپی کنید یا از صفحه ورود به سرور مراحل کامل را ببینید.
+          </p>
+
+          <div class="server-ip dashboard-copy" data-copy="connect sv.nox-rp.ir" role="button" tabindex="0">
+            connect sv.nox-rp.ir
+          </div>
+        </article>
+
+        <article class="account-card">
+          <div class="account-card-head">
+            <div>
+              <span class="auth-badge">Membership</span>
+              <h2>پیشرفت حساب</h2>
+            </div>
+          </div>
+
+          <div class="profile-meter">
+            <div>
+              <span>تکمیل حساب</span>
+              <strong>۸۵٪</strong>
+            </div>
+            <i style="--meter:85%"></i>
+          </div>
+
+          <p>
+            با تکمیل تنظیمات حساب و انتخاب پلن مناسب، تجربه ورود و مدیریت حساب شما کامل‌تر می‌شود.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="../assets/logos/logo-navbar.png" alt="NOX Roleplay">
+          <span>NOX Roleplay</span>
+        </div>
+        <p>سرور حرفه‌ای رول‌پلی فارسی با تجربه‌ای مدرن، منظم و جامعه‌ای فعال.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>دسترسی سریع</h4>
+        <a href="../index.html">خانه</a>
+        <a href="join.html">ورود به سرور</a>
+        <a href="rules.html">قوانین</a>
+        <a href="subscription.html">اشتراک</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>حساب کاربری</h4>
+        <a href="dashboard.html">داشبورد</a>
+        <a href="profile.html">پروفایل</a>
+        <a href="account-settings.html">تنظیمات</a>
+      </div>
+
+      <div class="footer-social">
+        <h4>شبکه‌های ما</h4>
+        <a href="#" class="social-btn">Discord</a>
+        <a href="#" class="social-btn">Instagram</a>
+        <a href="#" class="social-btn">YouTube</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-grid">
+        <span>© 2026 NOX Roleplay — تمامی حقوق محفوظ است</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/account.js" defer></script>
+</body>
+
+</html>
