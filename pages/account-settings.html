@@ -112,10 +112,23 @@
               <div class="security-box">
                 <h3>رمز عبور</h3>
                 <p>برای حفظ امنیت حساب، رمز عبور خود را دوره‌ای تغییر دهید.</p>
-                <button class="btn ghost" type="button"
-                  data-placeholder-action="امکان تغییر رمز عبور به‌زودی فعال می‌شود.">
-                  تغییر رمز عبور
-                </button>
+                <form id="changePasswordForm" class="settings-form" novalidate>
+                  <div class="form-field">
+                    <label for="currentPassword">رمز عبور فعلی</label>
+                    <input id="currentPassword" name="current_password" type="password" minlength="8" required>
+                    <small class="field-error" data-error-for="currentPassword"></small>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="newPassword">رمز عبور جدید</label>
+                    <input id="newPassword" name="new_password" type="password" minlength="8" required>
+                    <small class="field-error" data-error-for="newPassword"></small>
+                  </div>
+
+                  <button class="btn ghost" type="submit">
+                    تغییر رمز عبور
+                  </button>
+                </form>
               </div>
 
               <div class="security-box">
@@ -213,8 +226,12 @@
 
   <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
+  <script>
+    window.NOX_API_BASE_URL = "http://127.0.0.1:8000/api";
+  </script>
   <script src="../assets/js/main.js" defer></script>
   <script src="../assets/js/account.js" defer></script>
+  <script src="../assets/js/security.js" defer></script>
 </body>
 
 </html>

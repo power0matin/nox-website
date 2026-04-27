@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg[binary]
+passlib[argon2]
+python-dotenv
+itsdangerous
+email-validator
+alembic

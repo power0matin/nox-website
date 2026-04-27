@@ -7,14 +7,18 @@
 (() => {
   "use strict";
 
-  const STORAGE_USERS = "nox_accounts_v1";
-  const STORAGE_SESSION = "nox_session_v1";
-  const STORAGE_SUBSCRIPTION = "nox_subscription_v1";
-  const LOADING_DELAY = 520;
+  const API_BASE_URL = window.NOX_API_BASE_URL || "/api";
+
   const TOAST_DURATION = 3200;
   const AUTH_CLOSE_DELAY = 280;
   const AUTH_LEAVE_DELAY = 180;
   const AUTH_ENTER_DELAY = 280;
+
+  let accountState = {
+    user: null,
+    subscription: null,
+    ready: false,
+  };
 
   const qs = (selector, scope = document) => scope.querySelector(selector);
   const qsa = (selector, scope = document) =>
@@ -57,240 +61,194 @@
 
   const apiAdapter = {
     async login(email, password) {
-      await delay(LOADING_DELAY);
+      const data = await request("/auth/login", {
+        method: "POST",
+        body: {
+          email: normalizeEmail(email),
+          password,
+        },
+      });
 
-      const normalizedEmail = normalizeEmail(email);
-      const user = getUsers().find((item) => item.email === normalizedEmail);
-
-      if (!user || user.mockPassword !== encodePassword(password)) {
-        throw new Error("ایمیل یا رمز عبور درست نیست.");
-      }
-
-      setSession(user.email);
-      ensureSubscription(user.email);
-
-      return user;
+      setAccountState(data);
+      return data.user;
     },
 
     async signup(payload) {
-      await delay(LOADING_DELAY);
+      const data = await request("/auth/signup", {
+        method: "POST",
+        body: {
+          name: String(payload.name || "").trim(),
+          email: normalizeEmail(payload.email),
+          password: payload.password,
+        },
+      });
 
-      const users = getUsers();
-      const email = normalizeEmail(payload.email);
-      const name = String(payload.name || "").trim();
-
-      if (users.some((item) => item.email === email)) {
-        throw new Error("با این ایمیل قبلاً حساب ساخته شده است.");
-      }
-
-      const user = {
-        id: `nox_${Date.now()}`,
-        name,
-        email,
-        mockPassword: encodePassword(payload.password),
-        createdAt: new Date().toISOString(),
-      };
-
-      users.push(user);
-      saveUsers(users);
-      setSession(user.email);
-      ensureSubscription(user.email);
-
-      return user;
+      setAccountState(data);
+      return data.user;
     },
 
     async updateProfile(payload) {
-      await delay(LOADING_DELAY);
-
-      const current = getCurrentUser();
-      if (!current) {
-        throw new Error("برای ویرایش حساب ابتدا وارد شوید.");
-      }
-
-      const users = getUsers();
-      const nextEmail = normalizeEmail(payload.email);
-      const nextName = String(payload.name || "").trim();
-
-      const emailTaken = users.some(
-        (item) => item.email === nextEmail && item.email !== current.email,
-      );
-
-      if (emailTaken) {
-        throw new Error("این ایمیل برای حساب دیگری ثبت شده است.");
-      }
-
-      const updatedUsers = users.map((item) => {
-        if (item.email !== current.email) return item;
-        return {
-          ...item,
-          name: nextName,
-          email: nextEmail,
-        };
+      const data = await request("/me", {
+        method: "PATCH",
+        body: {
+          name: String(payload.name || "").trim(),
+          email: normalizeEmail(payload.email),
+        },
       });
 
-      saveUsers(updatedUsers);
-      setSession(nextEmail);
-      migrateSubscription(current.email, nextEmail);
+      setAccountState(data);
+      return data.user;
+    },
 
-      return getCurrentUser();
+    async getMe() {
+      return request("/me");
+    },
+
+    async getSubscription() {
+      const data = await request("/subscription");
+
+      accountState.subscription = data.subscription || null;
+      accountState.ready = true;
+
+      return accountState.subscription;
     },
 
     async subscribe(planKey) {
-      await delay(LOADING_DELAY + 260);
-
-      const current = getCurrentUser();
-      if (!current) {
-        throw new Error("برای خرید اشتراک ابتدا وارد شوید.");
-      }
-
       const plan = plans[planKey];
+
       if (!plan) {
         throw new Error("پلن انتخابی معتبر نیست.");
       }
 
+      const data = await request("/subscription/checkout", {
+        method: "POST",
+        body: {
+          plan: planKey,
+        },
+      });
+
       /*
-        Production integration placeholder:
-        Replace this mock write with:
-        - server-side checkout session creation
-        - payment provider webhook verification
-        - entitlement update on backend
-        - receipt / invoice storage
-      */
+      For paid plans, backend should return:
+      { checkoutUrl: "https://payment-gateway..." }
 
-      const subscriptions = getSubscriptions();
+      For free/basic plan, backend may return:
+      { subscription: {...} }
+    */
 
-      subscriptions[current.email] = {
-        plan: planKey,
-        status: planKey === "basic" ? "free" : "active",
-        priority: plan.priority,
-        updatedAt: new Date().toISOString(),
-      };
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+        return null;
+      }
 
-      saveSubscriptions(subscriptions);
+      if (data.subscription) {
+        accountState.subscription = data.subscription;
+        return data.subscription;
+      }
 
-      return subscriptions[current.email];
+      await loadAccountState();
+      return getCurrentSubscription();
     },
 
     async logout() {
-      await delay(240);
-      localStorage.removeItem(STORAGE_SESSION);
+      try {
+        await request("/auth/logout", {
+          method: "POST",
+        });
+      } finally {
+        clearAccountState();
+      }
     },
   };
 
-  function delay(ms) {
-    return new Promise((resolve) => window.setTimeout(resolve, ms));
+  function csrfHeaders() {
+    const token = getCookie("csrf_token");
+
+    return token
+      ? {
+          "X-CSRF-Token": token,
+        }
+      : {};
   }
 
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+
+    if (parts.length !== 2) return "";
+
+    return parts.pop().split(";").shift() || "";
+  }
+
+  async function request(path, options = {}) {
+    const hasBody = Object.prototype.hasOwnProperty.call(options, "body");
+
+    const response = await fetch(`${API_BASE_URL}${path}`, {
+      method: options.method || "GET",
+      credentials: "include",
+      headers: {
+        Accept: "application/json",
+        ...(hasBody ? { "Content-Type": "application/json" } : {}),
+        ...csrfHeaders(),
+        ...(options.headers || {}),
+      },
+      body: hasBody ? JSON.stringify(options.body) : undefined,
+    });
+
+    if (response.status === 204) {
+      return null;
+    }
+
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(
+        data?.message ||
+          data?.detail ||
+          "درخواست ناموفق بود. لطفاً دوباره تلاش کنید.",
+      );
+    }
+
+    return data;
+  }
+
+  function setAccountState(data) {
+    accountState.user = data?.user || null;
+    accountState.subscription = data?.subscription || null;
+    accountState.ready = true;
+
+    return accountState;
+  }
+
+  function clearAccountState() {
+    accountState.user = null;
+    accountState.subscription = null;
+    accountState.ready = true;
+  }
+
+  async function loadAccountState() {
+    try {
+      const data = await apiAdapter.getMe();
+      setAccountState(data);
+    } catch (_) {
+      clearAccountState();
+    }
+
+    renderAccountNav();
+    hydrateAccountPages();
+  }
+
+  function getCurrentUser() {
+    return accountState.user;
+  }
+
+  function getCurrentSubscription() {
+    return accountState.subscription;
+  }
   function normalizeEmail(value) {
     return String(value || "")
       .trim()
       .toLowerCase();
   }
-
-  function encodePassword(value) {
-    try {
-      return btoa(
-        encodeURIComponent(String(value || "")).replace(
-          /%([0-9A-F]{2})/g,
-          (_, hex) => String.fromCharCode(Number.parseInt(hex, 16)),
-        ),
-      );
-    } catch (_) {
-      return btoa(String(value || ""));
-    }
-  }
-
-  function safeJson(key, fallback) {
-    try {
-      const value = localStorage.getItem(key);
-      return value ? JSON.parse(value) : fallback;
-    } catch (_) {
-      return fallback;
-    }
-  }
-
-  function writeJson(key, value) {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-      return true;
-    } catch (_) {
-      toast("ذخیره‌سازی در مرورگر انجام نشد.", "error");
-      return false;
-    }
-  }
-
-  function getUsers() {
-    return safeJson(STORAGE_USERS, []);
-  }
-
-  function saveUsers(users) {
-    writeJson(STORAGE_USERS, users);
-  }
-
-  function getSubscriptions() {
-    return safeJson(STORAGE_SUBSCRIPTION, {});
-  }
-
-  function saveSubscriptions(value) {
-    writeJson(STORAGE_SUBSCRIPTION, value);
-  }
-
-  function setSession(email) {
-    writeJson(STORAGE_SESSION, {
-      email: normalizeEmail(email),
-      at: Date.now(),
-    });
-  }
-
-  function getCurrentUser() {
-    const session = safeJson(STORAGE_SESSION, null);
-    if (!session?.email) return null;
-
-    return getUsers().find((item) => item.email === session.email) || null;
-  }
-
-  function ensureSubscription(email) {
-    const normalizedEmail = normalizeEmail(email);
-    const subscriptions = getSubscriptions();
-
-    if (!subscriptions[normalizedEmail]) {
-      subscriptions[normalizedEmail] = {
-        plan: "basic",
-        status: "free",
-        priority: plans.basic.priority,
-        updatedAt: new Date().toISOString(),
-      };
-
-      saveSubscriptions(subscriptions);
-    }
-
-    return subscriptions[normalizedEmail];
-  }
-
-  function migrateSubscription(oldEmail, nextEmail) {
-    const oldKey = normalizeEmail(oldEmail);
-    const nextKey = normalizeEmail(nextEmail);
-
-    if (!oldKey || !nextKey || oldKey === nextKey) return;
-
-    const subscriptions = getSubscriptions();
-
-    subscriptions[nextKey] = subscriptions[oldKey] || {
-      plan: "basic",
-      status: "free",
-      priority: plans.basic.priority,
-      updatedAt: new Date().toISOString(),
-    };
-
-    delete subscriptions[oldKey];
-    saveSubscriptions(subscriptions);
-  }
-
-  function getCurrentSubscription() {
-    const user = getCurrentUser();
-    return user ? ensureSubscription(user.email) : null;
-  }
-
   function initials(name, email) {
     const source = String(name || email || "N").trim();
     const parts = source.split(/\s+/).filter(Boolean);
@@ -451,11 +409,12 @@
             ${escapeHtml(plan.label)} · ${escapeHtml(plan.priority)}
           </div>
 
-          <a role="menuitem" href="${routes.dashboard}">داشبورد</a>
-          <a role="menuitem" href="${routes.profile}">پروفایل</a>
-          <a role="menuitem" href="${routes.settings}">تنظیمات حساب</a>
-          <a role="menuitem" href="${routes.subscription}">اشتراک / پرداخت</a>
-          <button role="menuitem" type="button" data-logout>خروج</button>
+        <a role="menuitem" href="${routes.dashboard}">داشبورد</a>
+        <a role="menuitem" href="${routes.profile}">پروفایل</a>
+        <a role="menuitem" href="${routes.settings}">تنظیمات حساب</a>
+        <a role="menuitem" href="${routes.subscription}">اشتراک / پرداخت</a>
+        ${user.isAdmin ? `<a role="menuitem" href="${pagePrefix}admin.html">پنل ادمین</a>` : ""}
+        <button role="menuitem" type="button" data-logout>خروج</button>
         </div>
       </div>
     `;
@@ -523,17 +482,21 @@
   }
 
   async function handleLogout() {
-    await apiAdapter.logout();
+    try {
+      await apiAdapter.logout();
 
-    toast("از حساب کاربری خارج شدید.");
+      toast("از حساب کاربری خارج شدید.");
 
-    if (document.body.dataset.protected === "true") {
-      window.location.href = routes.home;
-      return;
+      if (document.body.dataset.protected === "true") {
+        window.location.href = routes.home;
+        return;
+      }
+
+      renderAccountNav();
+      hydrateAccountPages();
+    } catch (error) {
+      toast(error.message, "error");
     }
-
-    renderAccountNav();
-    hydrateAccountPages();
   }
 
   function createAuthModal() {
@@ -1121,15 +1084,17 @@
 
         button.disabled = true;
         button.classList.add("loading");
-        button.textContent = "در حال آماده‌سازی...";
+        button.textContent = "در حال آماده‌سازی پرداخت...";
 
         try {
           const sub = await apiAdapter.subscribe(button.dataset.planCheckout);
 
+          if (!sub) return;
+
           toast(
             sub.status === "free"
               ? "پلن رایگان فعال شد."
-              : "اشتراک اولویت صف به صورت آزمایشی فعال شد.",
+              : "اشتراک شما فعال شد.",
           );
 
           hydrateAccountPages();
@@ -1210,14 +1175,63 @@
       });
     });
   }
+  function initChangePasswordForm() {
+    const form = qs("#changePasswordForm");
+    if (!form || form.dataset.bound === "true") return;
 
-  document.addEventListener("DOMContentLoaded", () => {
+    form.dataset.bound = "true";
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      clearFormErrors(form);
+
+      const currentPassword = form.current_password.value;
+      const newPassword = form.new_password.value;
+
+      if (currentPassword.length < 8) {
+        setFieldError(
+          form.current_password,
+          "رمز عبور فعلی باید حداقل ۸ کاراکتر باشد.",
+        );
+        return;
+      }
+
+      if (newPassword.length < 8) {
+        setFieldError(
+          form.new_password,
+          "رمز عبور جدید باید حداقل ۸ کاراکتر باشد.",
+        );
+        return;
+      }
+
+      try {
+        await request("/me/password", {
+          method: "PATCH",
+          body: {
+            current_password: currentPassword,
+            new_password: newPassword,
+          },
+        });
+
+        form.reset();
+        toast("رمز عبور با موفقیت تغییر کرد.");
+      } catch (error) {
+        toast(error.message, "error");
+        setFieldError(form.current_password, error.message);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
     createAccountNav();
     createAuthModal();
     initAuthOpenButtons();
     initSettingsForm();
+    initChangePasswordForm();
     initSubscriptionActions();
     initPlaceholderActions();
-    hydrateAccountPages();
+
+    await loadAccountState();
   });
 })();

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b1120">
+  <meta name="color-scheme" content="dark">
+
+  <title>پنل ادمین | NOX Roleplay</title>
+
+  <link rel="icon" href="../favicon.ico">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+
+<body data-protected="true">
+  <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
+
+  <header class="navbar">
+    <div class="container nav-container">
+      <a class="logo" href="../index.html" aria-label="صفحه اصلی NOX Roleplay">
+        <img src="../assets/logos/logo-navbar.png" alt="لوگوی NOX Roleplay" width="34" height="34" decoding="async">
+        <span>NOX Roleplay</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="منوی اصلی سایت">
+        <a href="../index.html">خانه</a>
+        <a href="dashboard.html">داشبورد</a>
+        <a href="profile.html">پروفایل</a>
+        <a href="account-settings.html">تنظیمات</a>
+        <a href="subscription.html">اشتراک</a>
+        <a href="admin.html" class="active">ادمین</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" type="button" aria-label="باز کردن منوی سایت" aria-controls="navLinks"
+        aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobileOverlay" class="mobile-overlay" hidden></div>
+
+  <main id="main-content">
+    <section class="page-hero admin-hero protected-content" hidden>
+      <div class="container">
+        <span class="auth-badge">Admin Panel</span>
+        <h1>پنل مدیریت کاربران</h1>
+        <p>
+          مدیریت کاربران، پلن‌های اشتراک، وضعیت حساب‌ها، اولویت صف و دسترسی‌های مهم NOX Roleplay.
+        </p>
+      </div>
+    </section>
+
+    <section class="admin-page container protected-content" hidden>
+      <div id="adminAccessBox" class="admin-access-box" hidden>
+        <span class="auth-badge">Access Denied</span>
+        <h2>دسترسی ادمین ندارید</h2>
+        <p>این صفحه فقط برای حساب‌های ادمین فعال است.</p>
+        <a class="btn primary" href="dashboard.html">بازگشت به داشبورد</a>
+      </div>
+
+      <div id="adminApp" class="admin-app">
+        <section class="admin-overview">
+          <article class="admin-stat-card">
+            <span>Users</span>
+            <strong id="adminTotalUsers">۰</strong>
+            <p>کل کاربران ثبت‌شده</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <span>Paid</span>
+            <strong id="adminPaidUsers">۰</strong>
+            <p>اشتراک‌های فعال Priority / Elite</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <span>Elite</span>
+            <strong id="adminEliteUsers">۰</strong>
+            <p>کاربران با بالاترین اولویت صف</p>
+          </article>
+
+          <article class="admin-stat-card">
+            <span>Banned</span>
+            <strong id="adminBannedUsers">۰</strong>
+            <p>حساب‌های مسدود شده</p>
+          </article>
+        </section>
+
+        <article class="admin-panel">
+          <div class="admin-panel-head">
+            <div>
+              <span class="auth-badge">Management</span>
+              <h2>مدیریت کاربران</h2>
+              <p id="adminStatus">در حال دریافت کاربران...</p>
+            </div>
+
+            <div class="admin-head-actions">
+              <button class="btn ghost" type="button" id="adminExportCsv">خروجی CSV</button>
+              <button class="btn primary" type="button" id="refreshAdminUsers">بروزرسانی</button>
+            </div>
+          </div>
+
+          <div class="admin-filters">
+            <div class="form-field admin-search-field">
+              <label for="adminSearch">جستجو</label>
+              <input id="adminSearch" type="search" placeholder="نام، ایمیل یا ID کاربر..." autocomplete="off">
+            </div>
+
+            <div class="form-field">
+              <label for="adminPlanFilter">فیلتر پلن</label>
+              <select id="adminPlanFilter">
+                <option value="all">همه پلن‌ها</option>
+                <option value="basic">Basic</option>
+                <option value="priority">Priority</option>
+                <option value="elite">Elite</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="adminStatusFilter">فیلتر وضعیت</label>
+              <select id="adminStatusFilter">
+                <option value="all">همه وضعیت‌ها</option>
+                <option value="free">رایگان</option>
+                <option value="active">فعال</option>
+                <option value="expired">منقضی</option>
+                <option value="cancelled">لغو شده</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="adminBanFilter">فیلتر بن</label>
+              <select id="adminBanFilter">
+                <option value="all">همه کاربران</option>
+                <option value="banned">فقط مسدودها</option>
+                <option value="free">فقط آزادها</option>
+              </select>
+            </div>
+
+            <button class="btn ghost admin-reset-filters" type="button" id="adminResetFilters">
+              پاک کردن فیلتر
+            </button>
+          </div>
+
+          <div id="adminMessage" class="admin-message" hidden></div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>کاربر</th>
+                  <th>نقش</th>
+                  <th>وضعیت حساب</th>
+                  <th>اشتراک</th>
+                  <th>اولویت صف</th>
+                  <th>انقضا</th>
+                  <th>مدیریت اشتراک</th>
+                  <th>اقدام‌ها</th>
+                </tr>
+              </thead>
+
+              <tbody id="adminUsersBody">
+                <tr>
+                  <td colspan="8">
+                    <div class="admin-empty">در حال بارگذاری...</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="admin-modal" id="adminUserModal" hidden>
+    <div class="admin-modal-backdrop" data-admin-modal-close></div>
+
+    <section class="admin-modal-card" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle" tabindex="-1">
+      <button class="admin-modal-close" type="button" data-admin-modal-close aria-label="بستن">×</button>
+
+      <div class="admin-modal-head">
+        <span class="auth-badge">User Details</span>
+        <h2 id="adminModalTitle">جزئیات کاربر</h2>
+        <p id="adminModalSubtitle">اطلاعات کامل حساب و اشتراک کاربر.</p>
+      </div>
+
+      <div id="adminModalBody" class="admin-modal-body"></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="../assets/logos/logo-navbar.png" alt="NOX Roleplay">
+          <span>NOX Roleplay</span>
+        </div>
+        <p>پنل مدیریت داخلی NOX Roleplay برای مدیریت کاربران و اشتراک‌ها.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>مدیریت</h4>
+        <a href="admin.html">پنل ادمین</a>
+        <a href="dashboard.html">داشبورد</a>
+        <a href="subscription.html">اشتراک</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>حساب کاربری</h4>
+        <a href="profile.html">پروفایل</a>
+        <a href="account-settings.html">تنظیمات</a>
+        <a href="../index.html">خانه</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-grid">
+        <span>© 2026 NOX Roleplay — Admin Panel</span>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script>
+    window.NOX_API_BASE_URL = "http://127.0.0.1:8000/api";
+  </script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/account.js" defer></script>
+  <script src="../assets/js/admin.js" defer></script>
+  <script src="../assets/js/security.js" defer></script>
+</body>
+
+</html>

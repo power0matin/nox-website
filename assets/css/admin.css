@@ -1,0 +1,1183 @@
+/* ==========================================================
+   NOX Roleplay Admin Panel
+   File: assets/css/admin.css
+   Optimized UI / UX Layer
+   ========================================================== */
+
+/* ==========================================================
+   01. Page Shell
+   ========================================================== */
+
+.admin-hero {
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-soft);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(var(--primary-rgb), .20), transparent 42%),
+    radial-gradient(circle at 12% 30%, rgba(var(--info-rgb), .10), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(167, 139, 250, .08), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, 0));
+}
+
+.admin-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .014) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: .45;
+  mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
+}
+
+.admin-page {
+  padding: 52px 0 96px;
+}
+
+.admin-app {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* ==========================================================
+   02. Shared Surfaces
+   ========================================================== */
+
+.admin-stat-card,
+.admin-panel,
+.admin-access-box,
+.admin-modal-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, .075), transparent 28%),
+    radial-gradient(circle at 88% 90%, rgba(var(--info-rgb), .055), transparent 36%),
+    linear-gradient(155deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .024)),
+    rgba(13, 20, 35, .78);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 rgba(255, 255, 255, .045);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+}
+
+.admin-stat-card::before,
+.admin-panel::before,
+.admin-access-box::before,
+.admin-modal-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 14% 0%, var(--primary-10), transparent 34%),
+    radial-gradient(circle at 92% 100%, var(--info-10), transparent 38%);
+  opacity: .75;
+}
+
+.admin-stat-card::after,
+.admin-panel::after,
+.admin-access-box::after {
+  content: "";
+  position: absolute;
+  inset-inline: 1px;
+  top: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .18), transparent);
+  opacity: .75;
+}
+
+.admin-stat-card>*,
+.admin-panel>*,
+.admin-access-box>*,
+.admin-modal-card>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================
+   03. Overview Stats
+   ========================================================== */
+
+.admin-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-stat-card {
+  min-height: 158px;
+  padding: 23px;
+  isolation: isolate;
+  transition:
+    transform var(--transition-slow),
+    border-color var(--transition-slow),
+    box-shadow var(--transition-slow),
+    background var(--transition-slow);
+}
+
+.admin-stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-25);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, .06) inset,
+    0 24px 66px rgba(0, 0, 0, .34);
+}
+
+.admin-stat-card span {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: 1px solid var(--primary-22);
+  border-radius: var(--radius-round);
+  background: var(--primary-08);
+  color: var(--primary-light);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: .06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.admin-stat-card strong {
+  display: block;
+  margin-top: 16px;
+  color: #fff;
+  font-size: clamp(28px, 3.1vw, 42px);
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.admin-stat-card p {
+  max-width: 220px;
+  margin-top: 12px;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+/* ==========================================================
+   04. Main Panel
+   ========================================================== */
+
+.admin-panel {
+  padding: 27px;
+}
+
+.admin-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.admin-panel-head h2 {
+  margin-top: 10px;
+  font-size: clamp(24px, 3vw, 35px);
+  font-weight: 950;
+  letter-spacing: -.035em;
+}
+
+.admin-panel-head p {
+  max-width: 640px;
+  margin-top: 8px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+
+.admin-head-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-head-actions .btn {
+  min-height: 46px;
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   05. Filters
+   ========================================================== */
+
+.admin-filters {
+  display: grid;
+  grid-template-columns: minmax(270px, 1.35fr) repeat(3, minmax(150px, .65fr)) auto;
+  align-items: end;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding: 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, .045), transparent 30%),
+    rgba(255, 255, 255, .026);
+}
+
+.admin-filters .form-field {
+  gap: 7px;
+}
+
+.admin-filters label {
+  color: var(--text-soft);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.admin-search-field input {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.admin-filters input,
+.admin-filters select,
+.admin-subscription-control select {
+  color: var(--text-main);
+  border-color: var(--border-medium);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .035));
+}
+
+.admin-filters input:hover,
+.admin-filters select:hover,
+.admin-subscription-control select:hover {
+  border-color: var(--border-strong);
+}
+
+.admin-filters input:focus,
+.admin-filters select:focus,
+.admin-subscription-control select:focus {
+  border-color: var(--primary-35);
+  box-shadow:
+    0 0 0 4px var(--primary-08),
+    inset 0 1px 0 rgba(255, 255, 255, .055);
+}
+
+.admin-filters select,
+.admin-subscription-control select {
+  cursor: pointer;
+}
+
+.admin-reset-filters {
+  min-height: 48px;
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   06. Messages
+   ========================================================== */
+
+.admin-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, .055), transparent 34%),
+    var(--white-04);
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.admin-message::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  margin-top: 9px;
+  border-radius: 50%;
+  background: var(--info);
+  box-shadow: 0 0 0 5px var(--info-10);
+}
+
+.admin-message.error {
+  border-color: var(--error-20);
+  background: var(--error-10);
+  color: #fecaca;
+}
+
+.admin-message.error::before {
+  background: var(--error);
+  box-shadow: 0 0 0 5px var(--error-10);
+}
+
+.admin-message.success {
+  border-color: var(--success-20);
+  background: var(--success-10);
+  color: #bbf7d0;
+}
+
+.admin-message.success::before {
+  background: var(--success);
+  box-shadow: 0 0 0 5px var(--success-10);
+}
+
+/* ==========================================================
+   07. Table Shell
+   ========================================================== */
+
+.admin-table-wrap {
+  position: relative;
+  overflow: auto;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 14% 0%, rgba(255, 255, 255, .045), transparent 32%),
+    rgba(255, 255, 255, .024);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .035),
+    0 16px 44px rgba(0, 0, 0, .18);
+}
+
+.admin-table-wrap::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+}
+
+.admin-table-wrap::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, .035);
+  border-radius: var(--radius-round);
+}
+
+.admin-table-wrap::-webkit-scrollbar-thumb {
+  border: 3px solid rgba(11, 17, 32, .92);
+  border-radius: var(--radius-round);
+  background: rgba(255, 255, 255, .16);
+}
+
+.admin-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--primary-rgb), .42);
+}
+
+.admin-table {
+  width: 100%;
+  min-width: 1220px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 15px 14px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: middle;
+  text-align: right;
+}
+
+.admin-table th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, .055), transparent 40%),
+    linear-gradient(180deg, rgba(17, 24, 39, .985), rgba(11, 17, 32, .985));
+  color: var(--text-heading);
+  font-size: 12px;
+  font-weight: 950;
+  white-space: nowrap;
+  box-shadow:
+    inset 0 -1px 0 var(--border-soft),
+    0 8px 18px rgba(0, 0, 0, .14);
+}
+
+.admin-table td {
+  color: var(--text-main);
+  font-size: 13.5px;
+}
+
+.admin-table tbody tr {
+  transition:
+    background var(--transition-medium),
+    box-shadow var(--transition-medium);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(255, 255, 255, .038);
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ==========================================================
+   08. User Cell
+   ========================================================== */
+
+.admin-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 280px;
+}
+
+.admin-avatar {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 22%, rgba(255, 255, 255, .38), transparent 24%),
+    linear-gradient(135deg, var(--primary-light), var(--primary-hover));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 950;
+  box-shadow:
+    0 0 0 4px var(--primary-08),
+    0 12px 26px rgba(var(--primary-rgb), .18);
+}
+
+.admin-user-info {
+  min-width: 0;
+}
+
+.admin-user-info strong {
+  display: block;
+  max-width: 250px;
+  overflow: hidden;
+  color: var(--text-heading);
+  font-size: 14px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-user-info small {
+  display: block;
+  max-width: 270px;
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--text-muted);
+  direction: ltr;
+  font-size: 12.5px;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-user-id {
+  width: fit-content;
+  max-width: 270px;
+  margin-top: 6px;
+  overflow: hidden;
+  color: rgba(145, 161, 184, .78);
+  direction: ltr;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition:
+    color var(--transition-medium),
+    background var(--transition-medium);
+}
+
+.admin-user-id:hover {
+  color: var(--primary-light);
+}
+
+/* ==========================================================
+   09. Chips
+   ========================================================== */
+
+.admin-chip {
+  min-height: 29px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 2px;
+  padding: 5px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-round);
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, .07), transparent 30%),
+    var(--white-04);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.admin-chip.admin {
+  color: #bfdbfe;
+  border-color: var(--info-20);
+  background: var(--info-10);
+}
+
+.admin-chip.normal {
+  color: var(--text-muted);
+}
+
+.admin-chip.banned {
+  color: #fecaca;
+  border-color: var(--error-20);
+  background: var(--error-10);
+}
+
+.admin-chip.free-account {
+  color: #bbf7d0;
+  border-color: var(--success-20);
+  background: var(--success-10);
+}
+
+.admin-chip.plan-basic {
+  color: var(--text-muted);
+}
+
+.admin-chip.plan-priority {
+  color: var(--primary-lighter);
+  border-color: var(--primary-25);
+  background: var(--primary-10);
+}
+
+.admin-chip.plan-elite {
+  color: #fde68a;
+  border-color: var(--warning-20);
+  background: var(--warning-10);
+}
+
+.admin-chip.status-active {
+  color: #bbf7d0;
+  border-color: var(--success-20);
+  background: var(--success-10);
+}
+
+.admin-chip.status-expired,
+.admin-chip.status-cancelled {
+  color: #fecaca;
+  border-color: var(--error-20);
+  background: var(--error-10);
+}
+
+.admin-chip.status-free {
+  color: var(--text-soft);
+}
+
+/* ==========================================================
+   10. Subscription Controls
+   ========================================================== */
+
+.admin-subscription-control {
+  display: grid;
+  grid-template-columns: minmax(112px, 1fr) minmax(112px, 1fr);
+  gap: 8px;
+  min-width: 270px;
+}
+
+.admin-subscription-control select {
+  min-height: 40px;
+  padding-inline: 10px;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, .045);
+  color: var(--text-main);
+  font-size: 12.5px;
+  font-weight: 800;
+  outline: none;
+}
+
+.admin-subscription-control button {
+  grid-column: 1 / -1;
+  min-height: 40px;
+}
+
+/* ==========================================================
+   11. Action Buttons
+   ========================================================== */
+
+.admin-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 250px;
+}
+
+.admin-mini-btn {
+  min-height: 37px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .026));
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.35;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .04),
+    0 8px 18px rgba(0, 0, 0, .13);
+  transition:
+    transform var(--transition-medium),
+    border-color var(--transition-medium),
+    background var(--transition-medium),
+    color var(--transition-medium),
+    box-shadow var(--transition-medium);
+}
+
+.admin-mini-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--primary-25);
+  background: var(--primary-08);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .06),
+    0 12px 24px rgba(0, 0, 0, .18);
+}
+
+.admin-mini-btn:active {
+  transform: translateY(0) scale(.99);
+}
+
+.admin-mini-btn.primary {
+  border-color: var(--primary-25);
+  background: var(--primary-10);
+  color: var(--primary-lighter);
+}
+
+.admin-mini-btn.danger {
+  border-color: var(--error-20);
+  background: var(--error-10);
+  color: #fecaca;
+}
+
+.admin-mini-btn.success {
+  border-color: var(--success-20);
+  background: var(--success-10);
+  color: #bbf7d0;
+}
+
+.admin-mini-btn:disabled,
+.admin-subscription-control button:disabled,
+.admin-head-actions button:disabled,
+.admin-reset-filters:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.admin-mini-btn:focus-visible,
+.admin-subscription-control select:focus-visible,
+.admin-filters input:focus-visible,
+.admin-filters select:focus-visible {
+  outline: 3px solid var(--primary-35);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   12. Empty / Access Denied
+   ========================================================== */
+
+.admin-empty {
+  padding: 30px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.9;
+}
+
+.admin-access-box {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px;
+  text-align: center;
+}
+
+.admin-access-box h2 {
+  margin: 13px 0 8px;
+  font-size: clamp(24px, 3vw, 34px);
+}
+
+.admin-access-box p {
+  max-width: 520px;
+  margin-inline: auto;
+  line-height: 1.95;
+}
+
+.admin-access-box .btn {
+  margin-top: 24px;
+}
+
+/* ==========================================================
+   13. Modal
+   ========================================================== */
+
+.admin-modal[hidden] {
+  display: none !important;
+}
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2600;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  isolation: isolate;
+}
+
+.admin-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(var(--primary-rgb), .17), transparent 36%),
+    radial-gradient(circle at 20% 74%, rgba(var(--info-rgb), .08), transparent 38%),
+    rgba(3, 7, 18, .84);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  animation: adminBackdropIn .22s ease both;
+}
+
+.admin-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(780px, 100%);
+  max-height: calc(100dvh - 40px);
+  padding: 30px;
+  overflow: auto;
+  animation: adminModalIn .28s var(--ease-out) both;
+}
+
+.admin-modal-card::-webkit-scrollbar {
+  width: 10px;
+}
+
+.admin-modal-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, .035);
+}
+
+.admin-modal-card::-webkit-scrollbar-thumb {
+  border: 2px solid rgba(11, 17, 32, .96);
+  border-radius: var(--radius-round);
+  background: rgba(255, 255, 255, .16);
+}
+
+.admin-modal-close {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  width: 39px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-medium);
+  border-radius: 50%;
+  background: var(--white-05);
+  color: var(--text-main);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .20);
+  transition:
+    background var(--transition-medium),
+    color var(--transition-medium),
+    border-color var(--transition-medium),
+    transform var(--transition-medium);
+}
+
+.admin-modal-close:hover {
+  border-color: var(--primary-25);
+  background: var(--primary-10);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.admin-modal-close:focus-visible {
+  outline: 3px solid var(--primary-35);
+  outline-offset: 3px;
+}
+
+.admin-modal-head {
+  padding-left: 42px;
+}
+
+.admin-modal-head h2 {
+  margin: 12px 0 8px;
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 950;
+}
+
+.admin-modal-head p {
+  line-height: 1.9;
+}
+
+.admin-modal-body {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.admin-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.admin-detail-item {
+  padding: 15px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, .055), transparent 28%),
+    rgba(255, 255, 255, .035);
+}
+
+.admin-detail-item span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.admin-detail-item strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-heading);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.admin-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* ==========================================================
+   14. Animations
+   ========================================================== */
+
+@keyframes adminModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.985);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes adminBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================
+   15. Responsive
+   ========================================================== */
+
+@media (max-width: 1180px) {
+  .admin-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-search-field {
+    grid-column: 1 / -1;
+  }
+
+  .admin-reset-filters {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-page {
+    padding-top: 34px;
+    padding-bottom: 78px;
+  }
+
+  .admin-panel {
+    padding: 22px;
+  }
+
+  .admin-panel-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-head-actions {
+    justify-content: stretch;
+  }
+
+  .admin-head-actions .btn {
+    flex: 1 1 180px;
+  }
+}
+
+@media (max-width: 760px) {
+  .admin-page {
+    padding-top: 28px;
+  }
+
+  .admin-overview,
+  .admin-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-stat-card {
+    min-height: 132px;
+    padding: 20px;
+  }
+
+  .admin-panel {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .admin-filters {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .admin-head-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-head-actions .btn,
+  .admin-reset-filters {
+    width: 100%;
+  }
+
+  .admin-table {
+    min-width: 1120px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 13px 12px;
+  }
+
+  .admin-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-modal {
+    padding: 12px;
+  }
+
+  .admin-modal-card {
+    max-height: calc(100dvh - 24px);
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .admin-modal-head {
+    padding-left: 42px;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-page {
+    width: min(94%, 100%);
+  }
+
+  .admin-overview {
+    gap: 14px;
+  }
+
+  .admin-stat-card strong {
+    font-size: 30px;
+  }
+
+  .admin-panel-head h2 {
+    font-size: 24px;
+  }
+
+  .admin-panel {
+    padding: 16px;
+  }
+
+  .admin-filters {
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  .admin-access-box {
+    padding: 28px 20px;
+    border-radius: 20px;
+  }
+
+  .admin-user-cell {
+    min-width: 250px;
+  }
+
+  .admin-user-info strong {
+    max-width: 210px;
+  }
+
+  .admin-user-info small,
+  .admin-user-id {
+    max-width: 220px;
+  }
+
+  .admin-row-actions {
+    min-width: 230px;
+  }
+
+  .admin-modal-card {
+    padding: 22px 16px;
+  }
+
+  .admin-modal-head h2 {
+    font-size: 22px;
+  }
+}
+
+/* ==========================================================
+   16. Native Select Dropdown Visibility Fix
+   Put this block at the VERY END of admin.css
+   ========================================================== */
+
+.admin-filters select,
+.admin-subscription-control select {
+  color-scheme: dark;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  min-height: 48px;
+
+  padding: 0 14px 0 42px;
+
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+
+  background-color: #111827 !important;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #dbe7f7 50%),
+    linear-gradient(135deg, #dbe7f7 50%, transparent 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, .065), rgba(255, 255, 255, .035));
+  background-position:
+    18px 52%,
+    11px 52%,
+    0 0;
+  background-size:
+    7px 7px,
+    7px 7px,
+    100% 100%;
+  background-repeat: no-repeat;
+
+  color: #e6edf6 !important;
+
+  font-weight: 800;
+  line-height: 1.4;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .045),
+    0 10px 22px rgba(0, 0, 0, .12);
+}
+
+.admin-filters select:hover,
+.admin-subscription-control select:hover {
+  border-color: var(--primary-25);
+  background-color: #141c30 !important;
+}
+
+.admin-filters select:focus,
+.admin-subscription-control select:focus {
+  border-color: var(--primary-35);
+  background-color: #141c30 !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 0 0 4px var(--primary-08),
+    inset 0 1px 0 rgba(255, 255, 255, .06);
+}
+
+.admin-filters select option,
+.admin-subscription-control select option {
+  background-color: #111827 !important;
+  color: #e6edf6 !important;
+  font-weight: 700;
+}
+
+.admin-filters select option:hover,
+.admin-subscription-control select option:hover {
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
+}
+
+.admin-filters select option:checked,
+.admin-subscription-control select option:checked {
+  background-color: #ff7878 !important;
+  color: #ffffff !important;
+  font-weight: 900;
+}
+
+.admin-filters select optgroup,
+.admin-subscription-control select optgroup {
+  background-color: #0b1120 !important;
+  color: #ffffff !important;
+}
+
+/* Firefox-specific select color support */
+@-moz-document url-prefix() {
+
+  .admin-filters select,
+  .admin-subscription-control select {
+    background-color: #111827 !important;
+    color: #e6edf6 !important;
+  }
+
+  .admin-filters select option,
+  .admin-subscription-control select option {
+    background-color: #111827 !important;
+    color: #e6edf6 !important;
+  }
+}
+
+/* Small mobile select improvement */
+@media (max-width: 760px) {
+
+  .admin-filters select,
+  .admin-subscription-control select {
+    min-height: 48px;
+    font-size: 14px;
+  }
+}

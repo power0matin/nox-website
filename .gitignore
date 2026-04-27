@@ -13,5 +13,34 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Node (اگر بعدا اضافه کردی)
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Backend secrets / database
+.env
+backend/.env
+backend/nox.db
+*.sqlite
+*.sqlite3
+
+# Node / frontend build, if added later
 node_modules/
+dist/
+build/
+
+# Local uploads / backups
+uploads/
+backups/
+*.bak
